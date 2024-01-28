@@ -1,5 +1,8 @@
 package com.mlinyun.usercenter;
 
+import com.baomidou.mybatisplus.core.toolkit.Assert;
+import com.mlinyun.usercenter.mapper.UserMapper;
+import com.mlinyun.usercenter.model.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 @SpringBootTest
 class UserCenterApplicationTests {
@@ -19,6 +23,7 @@ class UserCenterApplicationTests {
     void contextLoads() {
     }
 
+    // MySQL 数据库连接测试
     @Test
     public void datasourceTest() throws SQLException {
         // 获取数据源类型
@@ -28,6 +33,18 @@ class UserCenterApplicationTests {
         // 判断连接对象是否为空
         System.out.println(connection != null);
         connection.close();
+    }
+
+    @Autowired
+    private UserMapper userMapper;
+
+    // MyBatis Plus 测试
+    @Test
+    public void testSelect() {
+        System.out.println(("----- selectAll method test ------"));
+        List<User> userList = userMapper.selectList(null);
+        Assert.isTrue(5 == userList.size(), "");
+        userList.forEach(System.out::println);
     }
 
 }
