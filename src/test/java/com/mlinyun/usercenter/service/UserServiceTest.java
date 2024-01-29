@@ -31,4 +31,50 @@ public class UserServiceTest {
         System.out.println(user.getId());
         Assertions.assertTrue(result);
     }
+
+    @Test
+    void userRegister() {
+        String userAccount = "yupi";
+        String userPassword = "";
+        String checkPassword = "123456";
+        // 非空测试
+        long result = userService.userRegister(userAccount, userPassword, checkPassword);
+        Assertions.assertEquals(-1, result);
+        // 账号位数测试
+        userAccount = "yu";
+        userPassword = "12345678";
+        checkPassword = "12345678";
+        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        Assertions.assertEquals(-1, result);
+        // 密码位数测试
+        userAccount = "yupi";
+        userPassword = "123456";
+        checkPassword = "123456";
+        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        Assertions.assertEquals(-1, result);
+        // 账号特殊字符测试
+        userAccount = "@yupi";
+        userPassword = "12345678";
+        checkPassword = "12345678";
+        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        Assertions.assertEquals(-1, result);
+        // 密码和校验密码相同测试
+        userAccount = "yupi";
+        userPassword = "12345678";
+        checkPassword = "12345679";
+        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        Assertions.assertEquals(-1, result);
+        // 账户重复测试
+        userAccount = "123456";
+        userPassword = "12345678";
+        checkPassword = "12345678";
+        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        Assertions.assertEquals(-1, result);
+        // 测试是否可以注册成功
+        userAccount = "mlinyun";
+        userPassword = "12345678";
+        checkPassword = "12345678";
+        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        Assertions.assertTrue(result > 0);
+    }
 }
