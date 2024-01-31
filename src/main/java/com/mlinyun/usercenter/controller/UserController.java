@@ -7,10 +7,9 @@ import com.mlinyun.usercenter.service.UserService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -58,4 +57,36 @@ public class UserController {
         }
         return userService.userLogin(userAccount, userPassword, request);
     }
+
+    /**
+     * 查询用户接口
+     *
+     * @param username 用户名
+     * @param request  请求
+     * @return 查询到的用户
+     */
+    @GetMapping("/search")
+    public List<User> searchUsers(@RequestParam String username, HttpServletRequest request) {
+        System.out.println(username);
+        if (StringUtils.isAnyBlank(username)) {
+            return null;
+        }
+        return userService.searchUsers(username, request);
+    }
+
+    /**
+     * 删除用户接口
+     *
+     * @param id      要删除用户 id
+     * @param request 请求
+     * @return boolean 删除结果（true - 删除成功 false - 删除失败）
+     */
+    @PostMapping("/delete")
+    public boolean deleteUser(@RequestParam long id, HttpServletRequest request) {
+        if (id < 0) {
+            return false;
+        }
+        return userService.deleteUser(id, request);
+    }
+
 }

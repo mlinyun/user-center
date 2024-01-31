@@ -4,6 +4,8 @@ import com.mlinyun.usercenter.model.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.util.List;
+
 /**
  * 用户服务
  *
@@ -32,5 +34,31 @@ public interface UserService extends IService<User> {
      * @return 脱敏后的用户信息
      */
     User userLogin(String userAccount, String userPassword, HttpServletRequest request);
+
+    /**
+     * 用户信息脱敏方法
+     *
+     * @param originUser 要脱敏的 user 对象
+     * @return 脱敏后的用户信息
+     */
+    User getSafetyUser(User originUser);
+
+    /**
+     * 查询用户：根据用户名搜索用户
+     *
+     * @param username 用户名
+     * @param request  请求
+     * @return 查询到的用户
+     */
+    List<User> searchUsers(String username, HttpServletRequest request);
+
+    /**
+     * 删除用户：根据 id 删除用户
+     *
+     * @param id      要删除用户 id
+     * @param request 请求
+     * @return boolean 删除结果（true - 删除成功 false - 删除失败）
+     */
+    boolean deleteUser(long id, HttpServletRequest request);
 
 }

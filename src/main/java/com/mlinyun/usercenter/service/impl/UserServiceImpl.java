@@ -13,8 +13,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import static com.mlinyun.usercenter.constant.UserConstant.ADMIN_ROLE;
+import static com.mlinyun.usercenter.constant.UserConstant.USER_LOGIN_STATE;
 
 /**
  * 用户服务实现类
@@ -34,11 +40,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * 盐值，用于混淆密码
      */
     private static final String SALT = "mlinyun";
-
-    /**
-     * 用户登录态键
-     */
-    private static final String USER_LOGIN_STATE = "userLoginState";
 
     /**
      * 用户注册服务实现
@@ -159,20 +160,77 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     /**
      * 用户信息脱敏方法
      *
-     * @param user 要脱敏的 user 对象
+     * @param originUser 要脱敏的 user 对象
      * @return 脱敏后的用户信息
      */
-    private static User getSafetyUser(User user) {
+    @Override
+    public User getSafetyUser(User originUser) {
         User safetyUser = new User();
-        safetyUser.setId(user.getId());
-        safetyUser.setUsername(user.getUsername());
-        safetyUser.setUserAccount(user.getUserAccount());
-        safetyUser.setAvatarUrl(user.getAvatarUrl());
-        safetyUser.setGender(user.getGender());
-        safetyUser.setPhone(user.getPhone());
-        safetyUser.setEmail(user.getEmail());
-        safetyUser.setUserStatus(user.getUserStatus());
-        safetyUser.setCreateTime(user.getCreateTime());
+        safetyUser.setId(originUser.getId());
+        safetyUser.setUsername(originUser.getUsername());
+        safetyUser.setUserAccount(originUser.getUserAccount());
+        safetyUser.setAvatarUrl(originUser.getAvatarUrl());
+        safetyUser.setGender(originUser.getGender());
+        safetyUser.setPhone(originUser.getPhone());
+        safetyUser.setEmail(originUser.getEmail());
+        safetyUser.setUserStatus(originUser.getUserStatus());
+        safetyUser.setCreateTime(originUser.getCreateTime());
+        safetyUser.setUserRole(originUser.getUserRole());
         return safetyUser;
+    }
+
+    /**
+     * 查询用户服务实现
+     *
+     * @param username 用户名
+     * @param request  请求
+     * @return 查询到的用户
+     */
+    @Override
+    public List<User> searchUsers(String username, HttpServletRequest request) {
+        // 仅管理员可以查询
+        if (!isAdmin(request)) {
+            return new ArrayList<>();
+        }
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        if (StringUtils.isNotBlank(username)) {
+            queryWrapper.like("username", username);
+        }
+        List<User> userList = userMapper.selectList(queryWrapper);
+        return userList.stream().map(user -> {
+            user.setUserPassword(null);
+            return getSafetyUser(user);
+        }).collect(Collectors.toList());
+    }
+
+    /**
+     * 删除用户服务实现
+     *
+     * @param id      要删除用户 id
+     * @param request 请求
+     * @return boolean 删除结果（true - 删除成功 false - 删除失败）
+     */
+    @Override
+    public boolean deleteUser(long id, HttpServletRequest request) {
+        // 仅管理员可删除
+        if (!isAdmin(request)) {
+            return false;
+        }
+        if (id < 0) {
+            return false;
+        }
+        return userMapper.deleteById(id) > 0;
+    }
+
+    /**
+     * 鉴权函数：判断是否为管理员
+     *
+     * @param request 请求
+     * @return boolean（true - 管理员 false - 非管理员）
+     */
+    public boolean isAdmin(HttpServletRequest request) {
+        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
+        User user = (User) userObj;
+        return user != null && user.getUserRole() == ADMIN_ROLE;
     }
 }
