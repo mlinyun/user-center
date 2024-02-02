@@ -61,4 +61,12 @@ public interface UserService extends IService<User> {
      */
     boolean deleteUser(long id, HttpServletRequest request);
 
+    /**
+     * 获取当前用户信息
+     *
+     * @param request 请求
+     * @return 当前登录的用户信息
+     */
+    User getCurrentUser(HttpServletRequest request);
+
 }

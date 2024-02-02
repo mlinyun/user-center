@@ -165,6 +165,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      */
     @Override
     public User getSafetyUser(User originUser) {
+        // 判空
+        if (originUser == null) {
+            return null;
+        }
         User safetyUser = new User();
         safetyUser.setId(originUser.getId());
         safetyUser.setUsername(originUser.getUsername());
@@ -220,6 +224,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return false;
         }
         return userMapper.deleteById(id) > 0;
+    }
+
+    /**
+     * 获取当前用户信息服务实现
+     *
+     * @param request 请求
+     * @return 当前登录的用户信息
+     */
+    @Override
+    public User getCurrentUser(HttpServletRequest request) {
+        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
+        User currentUser = (User) userObj;
+        if (currentUser == null) {
+            return null;
+        }
+        Long userId = currentUser.getId();
+        // TODO 校验用户是否合法
+        User user = userMapper.selectById(userId);
+        return getSafetyUser(user);
     }
 
     /**
