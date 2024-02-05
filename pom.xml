@@ -97,6 +97,10 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                    <!-- 虚拟机参数，设置默认的编码为UTF-8 -->
+                    <jvmArguments>
+                        -Dfile.encoding=UTF-8
+                    </jvmArguments>
                 </configuration>
             </plugin>
         </plugins>

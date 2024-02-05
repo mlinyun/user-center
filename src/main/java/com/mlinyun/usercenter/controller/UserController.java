@@ -59,6 +59,19 @@ public class UserController {
     }
 
     /**
+     * 用户注销接口
+     * @param request 请求
+     * @return true - 注销成功 false - 注销失败
+     */
+    @PostMapping("/outLogin")
+    public Boolean userLogout(HttpServletRequest request) {
+        if (request == null) {
+            return null;
+        }
+        return userService.userLogout(request);
+    }
+
+    /**
      * 查询用户接口
      *
      * @param username 用户名
@@ -66,11 +79,7 @@ public class UserController {
      * @return 查询到的用户
      */
     @GetMapping("/search")
-    public List<User> searchUsers(@RequestParam String username, HttpServletRequest request) {
-        System.out.println(username);
-        if (StringUtils.isAnyBlank(username)) {
-            return null;
-        }
+    public List<User> searchUsers(String username, HttpServletRequest request) {
         return userService.searchUsers(username, request);
     }
 
@@ -97,6 +106,9 @@ public class UserController {
      */
     @GetMapping("/currentUser")
     public User getCurrentUser(HttpServletRequest request) {
+        if (request == null) {
+            return null;
+        }
         return userService.getCurrentUser(request);
     }
 

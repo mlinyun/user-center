@@ -246,6 +246,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     /**
+     * 用户注销服务实现
+     *
+     * @param request 请求
+     * @return true - 注销成功 false - 注销失败
+     */
+    @Override
+    public boolean userLogout(HttpServletRequest request) {
+        // 移除登录态
+        request.getSession().removeAttribute(USER_LOGIN_STATE);
+        return true;
+    }
+
+    /**
      * 鉴权函数：判断是否为管理员
      *
      * @param request 请求
