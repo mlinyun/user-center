@@ -2,6 +2,8 @@ package com.mlinyun.usercenter.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mlinyun.usercenter.common.ErrorCode;
+import com.mlinyun.usercenter.exception.BusinessException;
 import com.mlinyun.usercenter.model.domain.User;
 import com.mlinyun.usercenter.service.UserService;
 import com.mlinyun.usercenter.mapper.UserMapper;
@@ -54,30 +56,29 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 1. 校验
         // 1.1 校验是否为空 引入apache common utils ：Apache Commons Lang 使用其中的方法：isAnyBlank 可判断多个字符串是否为空
         if (StringUtils.isAnyBlank(userAccount, userPassword, checkPassword, planetCode)) {
-            // TODO 修改为自定义异常
-            return -1;
+            throw new BusinessException(ErrorCode.PARAMS_NULL, "请求参数为空");
         }
-        // 1.2 校验账号位数（账户不能小于 4 位）
-        if (userAccount.length() < 4) {
-            return -1;
+        // 1.2 校验账号位数（账户长度范围 4-16位）
+        if (userAccount.length() < 4 || userAccount.length() > 16) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户账号长度不符合要求");
         }
-        // 1.3 校验密码位数（密码不小于 8 位）
-        if (userPassword.length() < 8 || checkPassword.length() < 8) {
-            return -1;
+        // 1.3 校验密码位数（密码长度范围 8-16位）
+        if (userPassword.length() < 8 || checkPassword.length() < 8 || userPassword.length() > 16 || checkPassword.length() > 16) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户密码长度不符合要求");
         }
         // 1.7 校验星球编号长度
         if (planetCode.length() > 5) {
-            return -1;
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "星球编号不对");
         }
         // 1.4 校验账号不包含特殊字符
         String validPattern = "[\\u00A0\\s\"`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“'。，、？]";
         Matcher matcher = Pattern.compile(validPattern).matcher(userAccount);
         if (matcher.find()) {
-            return -1;
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户账号不能包含特殊字符");
         }
         // 1.5 校验密码和校验密码是否相同
         if (!userPassword.equals(checkPassword)) {
-            return -1;
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "两次输入密码不一致");
         }
         // 1.6 账户不能重复（需要查询数据库中的用户表是否存在此用户）
         // 这一步放在最后，当其他校验通过时，再去数据库查询账号是否存在，这样可以防止性能浪费
@@ -85,14 +86,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         queryWrapper.eq("userAccount", userAccount);
         long count = userMapper.selectCount(queryWrapper);
         if (count > 0) {
-            return -1;
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "该账号已被注册");
         }
         // 1.8 星球编号不能重复
         queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("planetCode", planetCode);
         count = userMapper.selectCount(queryWrapper);
         if (count > 0) {
-            return -1;
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "星球编号不能重复");
         }
 
         // 2. 密码加密
@@ -106,7 +107,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         user.setPlanetCode(planetCode);
         boolean saveResult = this.save(user);
         if (!saveResult) {
-            return -1;
+            throw new RuntimeException(ErrorCode.SYSTEM_ERROR.getMessage());
         }
         // 4. 返回新用户 id
         return user.getId();
@@ -125,22 +126,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 1. 校验
         // 1.1 校验是否为空 引入apache common utils ：Apache Commons Lang 使用其中的方法：isAnyBlank 可判断多个字符串是否为空
         if (StringUtils.isAnyBlank(userAccount, userPassword)) {
-            // TODO 修改为自定义异常
-            return null;
+            throw new BusinessException(ErrorCode.PARAMS_NULL, "请求参数为空");
         }
-        // 1.2 校验账号位数（账户不能小于 4 位）
-        if (userAccount.length() < 4) {
-            return null;
+        // 1.2 校验账号位数（账户长度范围 4-16位）
+        if (userAccount.length() < 4 || userAccount.length() > 16) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户账号长度不符合要求");
         }
-        // 1.3 校验密码位数（密码不小于 8 位）
-        if (userPassword.length() < 8) {
-            return null;
+        // 1.3 校验密码位数（密码长度范围 8-16位）
+        if (userPassword.length() < 8 || userPassword.length() > 16) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户密码长度不符合要求");
         }
         // 1.4 校验账号不包含特殊字符
         String validPattern = "[\\u00A0\\s\"`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“'。，、？]";
         Matcher matcher = Pattern.compile(validPattern).matcher(userAccount);
         if (matcher.find()) {
-            return null;
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户账号不能包含特殊字符");
         }
 
         // 2. 密码加密
@@ -156,7 +156,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 用户不存在
         if (user == null) {
             log.info("user login failed, userAccount cannot match userPassword");
-            return null;
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户账号不存在或密码不正确");
         }
 
         // 4. 用户信息脱敏
@@ -207,7 +207,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public List<User> searchUsers(String username, HttpServletRequest request) {
         // 仅管理员可以查询
         if (!isAdmin(request)) {
-            return new ArrayList<>();
+            throw new BusinessException(ErrorCode.NO_AUTH, "缺少管理员权限");
         }
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         if (StringUtils.isNotBlank(username)) {
@@ -231,10 +231,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public boolean deleteUser(long id, HttpServletRequest request) {
         // 仅管理员可删除
         if (!isAdmin(request)) {
-            return false;
+            throw new BusinessException(ErrorCode.NO_AUTH, "缺少管理员权限");
         }
         if (id < 0) {
-            return false;
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "id 小于 0");
         }
         return userMapper.deleteById(id) > 0;
     }
@@ -250,7 +250,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
         User currentUser = (User) userObj;
         if (currentUser == null) {
-            return null;
+            throw new BusinessException(ErrorCode.NOT_LOGIN, "用户未登录");
         }
         Long userId = currentUser.getId();
         // TODO 校验用户是否合法
