@@ -25,22 +25,24 @@ VALUES (1, 'Jone', 18, 'test1@baomidou.com'),
        (5, 'Billie', 24, 'test5@baomidou.com');
 -- MyBatis Plus 测试用到的表和数据（结束）
 
-CREATE TABLE `user`
+
+create table user_center.user
 (
-    `id`           bigint                                   NOT NULL AUTO_INCREMENT COMMENT 'id',
-    `username`     varchar(256) COLLATE utf8mb3_croatian_ci          DEFAULT NULL COMMENT '用户昵称',
-    `userAccount`  varchar(256) COLLATE utf8mb3_croatian_ci          DEFAULT NULL COMMENT '用户账号',
-    `avatarUrl`    varchar(1024) COLLATE utf8mb3_croatian_ci         DEFAULT NULL COMMENT '用户头像',
-    `gender`       tinyint                                           DEFAULT NULL COMMENT '性别',
-    `userPassword` varchar(512) COLLATE utf8mb3_croatian_ci NOT NULL COMMENT '用户密码',
-    `phone`        varchar(128) COLLATE utf8mb3_croatian_ci          DEFAULT NULL COMMENT '电话',
-    `email`        varchar(512) COLLATE utf8mb3_croatian_ci          DEFAULT NULL COMMENT '邮箱',
-    `userStatus`   int                                      NOT NULL DEFAULT '0' COMMENT '用户状态 0 - 正常',
-    `createTime`   datetime                                          DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `updateTime`   datetime                                          DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    `isDelete`     tinyint                                  NOT NULL DEFAULT '0' COMMENT '是否删除',
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb3
-  COLLATE = utf8mb3_croatian_ci COMMENT ='用户';
+    id           bigint auto_increment comment 'id'
+        primary key,
+    username     varchar(256)                       null comment '用户昵称',
+    userAccount  varchar(256)                       null comment '用户账号',
+    avatarUrl    varchar(1024)                      null comment '用户头像',
+    gender       tinyint                            null comment '性别',
+    userPassword varchar(512)                       not null comment '用户密码',
+    phone        varchar(128)                       null comment '电话',
+    email        varchar(512)                       null comment '邮箱',
+    userStatus   int      default 0                 not null comment '用户状态 0 - 正常',
+    createTime   datetime default CURRENT_TIMESTAMP null comment '创建时间',
+    updateTime   datetime default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP comment '更新时间',
+    isDelete     tinyint  default 0                 not null comment '是否删除',
+    userRole     int      default 0                 not null comment '用户角色 0 - 普通用户 1 - 管理员',
+    planetCode   varchar(512)                       not null comment '星球编号'
+)
+    comment '用户';
 
