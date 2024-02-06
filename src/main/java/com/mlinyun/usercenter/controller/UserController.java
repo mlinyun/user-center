@@ -8,6 +8,8 @@ import com.mlinyun.usercenter.model.domain.User;
 import com.mlinyun.usercenter.model.domain.request.UserLoginRequest;
 import com.mlinyun.usercenter.model.domain.request.UserRegisterRequest;
 import com.mlinyun.usercenter.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "用户中心接口")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -28,6 +31,7 @@ public class UserController {
      * @param userRegisterRequest 用户注册请求体
      * @return 新用户 id
      */
+    @Operation(summary = "用户注册")
     @PostMapping("/register")
     public BaseResponse<Long> userRegister(@RequestBody UserRegisterRequest userRegisterRequest) {
         if (userRegisterRequest == null) {
@@ -51,6 +55,7 @@ public class UserController {
      * @param request          请求
      * @return 脱敏后的用户信息
      */
+    @Operation(summary = "用户登录")
     @PostMapping("/login")
     public BaseResponse<User> userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request) {
         if (userLoginRequest == null) {
@@ -71,6 +76,7 @@ public class UserController {
      * @param request 请求
      * @return true - 注销成功 false - 注销失败
      */
+    @Operation(summary = "用户注销")
     @PostMapping("/outLogin")
     public BaseResponse<Boolean> userLogout(HttpServletRequest request) {
         if (request == null) {
@@ -87,6 +93,7 @@ public class UserController {
      * @param request  请求
      * @return 查询到的用户
      */
+    @Operation(summary = "搜索用户")
     @GetMapping("/search")
     public BaseResponse<List<User>> searchUsers(String username, HttpServletRequest request) {
         List<User> userList = userService.searchUsers(username, request);
@@ -100,6 +107,7 @@ public class UserController {
      * @param request 请求
      * @return boolean 删除结果（true - 删除成功 false - 删除失败）
      */
+    @Operation(summary = "删除用户")
     @PostMapping("/delete")
     public BaseResponse<Boolean> deleteUser(@RequestParam long id, HttpServletRequest request) {
         if (id < 0) {
@@ -115,6 +123,7 @@ public class UserController {
      * @param request 请求
      * @return 当前登录的用户信息
      */
+    @Operation(summary = "获取用户信息")
     @GetMapping("/currentUser")
     public BaseResponse<User> getCurrentUser(HttpServletRequest request) {
         if (request == null) {
