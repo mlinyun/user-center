@@ -1,5 +1,6 @@
 package com.mlinyun.usercenter.model.domain.request;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serial;
@@ -10,6 +11,7 @@ import java.io.Serializable;
  *
  * @author LinCanhui
  */
+@Schema(description = "用户注册请求体")
 @Data
 public class UserRegisterRequest implements Serializable {
 
@@ -22,21 +24,25 @@ public class UserRegisterRequest implements Serializable {
     /**
      * 用户账号
      */
+    @Schema(description = "用户账号")
     private String userAccount;
 
     /**
      * 用户密码
      */
+    @Schema(description = "用户密码")
     private String userPassword;
 
     /**
      * 校验密码
      */
+    @Schema(description = "校验密码")
     private String checkPassword;
 
     /**
      * 用户星球编号
      */
+    @Schema(description = "用户星球编号")
     private String planetCode;
 
 }
