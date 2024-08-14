@@ -27,7 +27,7 @@ VALUES (1, 'Jone', 18, 'test1@baomidou.com'),
 
 -- 项目正式用到的用户表
 DROP TABLE IF EXISTS `user`;
-CREATE TABLE user_center.user
+CREATE TABLE `user_center.user`
 (
     id           bigint auto_increment comment 'id' primary key,
     username     varchar(256)                       null comment '用户昵称',
@@ -46,7 +46,9 @@ CREATE TABLE user_center.user
 ) ENGINE = InnoBD
   DEFAULT CHARSET = utf8mb4;
 
-INSERT INTO `user`
+DELETE
+FROM `user_center.user`;
+INSERT INTO `user_center.user`
 VALUES (1, '凌云', 'LingYunAdmin', '/avatar.png', 1, '596b8d3f950830fda18e7ef035bd0918', '15600000000',
         '1234567890@qq.com', 0, '2024-01-30 01:01:10', '2024-02-05 01:57:05', 0, 1, '1'),
        (2, '凌云2', 'LingYunUser', '/avatar.png', 0, '596b8d3f950830fda18e7ef035bd0918', '15611111111',
