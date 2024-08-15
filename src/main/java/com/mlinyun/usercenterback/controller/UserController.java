@@ -1,5 +1,6 @@
 package com.mlinyun.usercenterback.controller;
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.mlinyun.usercenterback.common.BaseResponse;
 import com.mlinyun.usercenterback.common.ErrorCode;
 import com.mlinyun.usercenterback.common.ResultUtils;
@@ -8,6 +9,7 @@ import com.mlinyun.usercenterback.model.domain.User;
 import com.mlinyun.usercenterback.model.domain.request.UserLoginRequest;
 import com.mlinyun.usercenterback.model.domain.request.UserRegisterRequest;
 import com.mlinyun.usercenterback.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
@@ -30,6 +32,8 @@ public class UserController {
      * @param userRegisterRequest 用户注册请求体
      * @return 新用户 id
      */
+    @ApiOperationSupport(author = "LinCanhui")
+    @Operation(summary = "用户注册", description = "使用账号密码星球编号注册账号", tags = {"用户中心接口"})
     @PostMapping("/register")
     public BaseResponse<Long> userRegister(@RequestBody UserRegisterRequest userRegisterRequest) {
         if (userRegisterRequest == null) {
@@ -53,6 +57,8 @@ public class UserController {
      * @param request          请求
      * @return 脱敏后的用户信息
      */
+    @ApiOperationSupport(author = "LinCanhui")
+    @Operation(summary = "用户登录", description = "账号密码登录", tags = {"用户中心接口"})
     @PostMapping("/login")
     public BaseResponse<User> userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request) {
         if (userLoginRequest == null) {
@@ -74,6 +80,8 @@ public class UserController {
      * @param request  请求
      * @return 查询到的用户
      */
+    @ApiOperationSupport(author = "LinCanhui")
+    @Operation(summary = "搜索用户", description = "搜索全部用或根据用户名进行模糊搜索", tags = {"用户中心接口"})
     @GetMapping("/search")
     public BaseResponse<List<User>> searchUsers(@RequestParam String username, HttpServletRequest request) {
         if (StringUtils.isAnyBlank(username)) {
@@ -90,6 +98,8 @@ public class UserController {
      * @param request 请求
      * @return boolean 删除结果（true - 删除成功 false - 删除失败）
      */
+    @ApiOperationSupport(author = "LinCanhui")
+    @Operation(summary = "删除用户", description = "通过 id 删除用户", tags = {"用户中心接口"})
     @PostMapping("/delete")
     public BaseResponse<Boolean> deleteUser(@RequestParam long id, HttpServletRequest request) {
         if (id < 0) {
@@ -105,6 +115,8 @@ public class UserController {
      * @param request 请求
      * @return 当前登录的用户信息
      */
+    @ApiOperationSupport(author = "LinCanhui")
+    @Operation(summary = "获取用户信息", description = "获取当前登录用户脱敏之后的信息", tags = {"用户中心接口"})
     @GetMapping("/currentUser")
     public BaseResponse<User> getCurrentUser(HttpServletRequest request) {
         if (request == null) {
@@ -120,6 +132,8 @@ public class UserController {
      * @param request 请求
      * @return true - 注销成功 false - 注销失败
      */
+    @ApiOperationSupport(author = "LinCanhui")
+    @Operation(summary = "用户注销", description = "用户退出登录", tags = {"用户中心接口"})
     @PostMapping("/outLogin")
     public BaseResponse<Boolean> userLogout(HttpServletRequest request) {
         if (request == null) {
