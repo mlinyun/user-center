@@ -13,9 +13,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
+import static com.mlinyun.usercenterback.constant.UserConstant.ADMIN_ROLE;
 import static com.mlinyun.usercenterback.constant.UserConstant.USER_LOGIN_STATE;
 
 /**
@@ -35,12 +39,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      */
     private static final String SALT = "mlinyun";
 
-    public UserServiceImpl(UserMapper userMapper) {
-        this.userMapper = userMapper;
-    }
-
     /**
-     * 用户注册
+     * 用户注册服务实现
      *
      * @param userAccount   用户账号
      * @param userPassword  用户密码
@@ -120,7 +120,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     /**
-     * 用户登录
+     * 用户登录服务实现
      *
      * @param userAccount  用户账号
      * @param userPassword 用户密码
@@ -181,7 +181,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     /**
-     * 用户信息脱敏方法
+     * 用户信息脱敏方法服务实现
      *
      * @param originUser 要脱敏的 user 对象
      * @return 脱敏后的用户信息
@@ -206,5 +206,96 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         safetyUser.setUserRole(originUser.getUserRole());
         safetyUser.setPlanetCode(originUser.getPlanetCode());
         return safetyUser;
+    }
+
+    /**
+     * 查询用户服务实现：根据用户名搜索用户
+     *
+     * @param username 用户名
+     * @param request  请求
+     * @return 查询到的用户
+     */
+    @Override
+    public List<User> searchUsers(String username, HttpServletRequest request) {
+        // 仅管理员可以查询
+        if (!isAdmin(request)) {
+            // TODO 修改为自定义异常（缺少管理员权限）
+            return new ArrayList<>();
+        }
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        if (StringUtils.isNotBlank(username)) {
+            queryWrapper.like("username", username);
+        }
+        List<User> userList = userMapper.selectList(queryWrapper);
+        return userList.stream().map(user -> {
+            user.setUserPassword(null);
+            return getSafetyUser(user);
+        }).collect(Collectors.toList());
+    }
+
+    /**
+     * 删除用户服务实现：根据 id 删除用户
+     *
+     * @param id      要删除用户 id
+     * @param request 请求
+     * @return boolean 删除结果（true - 删除成功 false - 删除失败）
+     */
+    @Override
+    public boolean deleteUser(long id, HttpServletRequest request) {
+        // 仅管理员可删除
+        if (!isAdmin(request)) {
+            // TODO 修改为自定义异常（缺少管理员权限）
+            return false;
+        }
+        if (id < 0) {
+            // TODO 修改为自定义异常（id 小于 0）
+            return false;
+        }
+        return userMapper.deleteById(id) > 0;
+    }
+
+    /**
+     * 获取当前用户信息服务实现
+     *
+     * @param request 请求
+     * @return 当前登录的用户信息
+     */
+    @Override
+    public User getCurrentUser(HttpServletRequest request) {
+        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
+        User currentUser = (User) userObj;
+        if (currentUser == null) {
+            // TODO 修改为自定义异常（用户未登录）
+            return null;
+        }
+        long userId = currentUser.getId();
+        // TODO 校验用户是否合法
+        User user = userMapper.selectById(userId);
+        return getSafetyUser(user);
+    }
+
+    /**
+     * 用户注销功能服务实现
+     *
+     * @param request 请求
+     * @return true - 注销成功 false - 注销失败
+     */
+    @Override
+    public boolean userLogout(HttpServletRequest request) {
+        // 移除登录态
+        request.getSession().removeAttribute(USER_LOGIN_STATE);
+        return true;
+    }
+
+    /**
+     * 鉴权函数：判断是否为管理员
+     *
+     * @param request 请求
+     * @return boolean（true - 管理员 false - 非管理员）
+     */
+    public boolean isAdmin(HttpServletRequest request) {
+        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
+        User user = (User) userObj;
+        return user != null && user.getUserRole() == ADMIN_ROLE;
     }
 }

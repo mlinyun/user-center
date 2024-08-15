@@ -7,10 +7,9 @@ import com.mlinyun.usercenterback.service.UserService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 // 添加 @RestController 注解（适用于restful风格的API，返回值默认为json类型）
 @RestController
@@ -64,6 +63,70 @@ public class UserController {
             return null;
         }
         return userService.userLogin(userAccount, userPassword, request);
+    }
+
+    /**
+     * 查询用户接口
+     *
+     * @param username 用户名
+     * @param request  请求
+     * @return 查询到的用户
+     */
+    @GetMapping("/search")
+    public List<User> searchUsers(@RequestParam String username, HttpServletRequest request) {
+        if (StringUtils.isAnyBlank(username)) {
+            // TODO 修改为自定义异常（请求参数为空）
+            return null;
+        }
+        return userService.searchUsers(username, request);
+    }
+
+    /**
+     * 删除用户接口
+     *
+     * @param id      要删除用户 id
+     * @param request 请求
+     * @return boolean 删除结果（true - 删除成功 false - 删除失败）
+     */
+    @PostMapping("/delete")
+    public boolean deleteUser(@RequestParam long id, HttpServletRequest request) {
+        if (id < 0) {
+            // TODO 修改为自定义异常（请求参数错误）
+            return false;
+        }
+        return userService.deleteUser(id, request);
+    }
+
+    /**
+     * 获取当前用户信息接口
+     *
+     * @param request 请求
+     * @return 当前登录的用户信息
+     */
+    @GetMapping("/currentUser")
+    public User getCurrentUser(HttpServletRequest request) {
+        if (request == null) {
+            // TODO 修改为自定义异常（请求参数错误）
+            return null;
+        }
+        User user = userService.getCurrentUser(request);
+        return user;
+    }
+
+    /**
+     * 用户注销接口
+     *
+     * @param request 请求
+     * @return true - 注销成功 false - 注销失败
+     */
+    @PostMapping("/outLogin")
+    public boolean userLogout(HttpServletRequest request) {
+        if (request == null) {
+            // TODO 修改为自定义异常（请求参数错误）
+            return false;
+        }
+        boolean result = userService.userLogout(request);
+        return result;
     }
 
 }
