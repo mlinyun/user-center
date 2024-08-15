@@ -16,6 +16,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.mlinyun.usercenterback.constant.UserConstant.USER_LOGIN_STATE;
+
 /**
 * @author LinCanhui
 * @description 针对表【user(用户)】的数据库操作Service实现
@@ -36,11 +38,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public UserServiceImpl(UserMapper userMapper) {
         this.userMapper = userMapper;
     }
-
-    /**
-     * 用户登录态键
-     */
-    private static final String USER_LOGIN_STATE = "userLoginState";
 
     /**
      * 用户注册
