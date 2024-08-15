@@ -1,5 +1,9 @@
 package com.mlinyun.usercenterback.controller;
 
+import com.mlinyun.usercenterback.common.BaseResponse;
+import com.mlinyun.usercenterback.common.ErrorCode;
+import com.mlinyun.usercenterback.common.ResultUtils;
+import com.mlinyun.usercenterback.exception.BusinessException;
 import com.mlinyun.usercenterback.model.domain.User;
 import com.mlinyun.usercenterback.model.domain.request.UserLoginRequest;
 import com.mlinyun.usercenterback.model.domain.request.UserRegisterRequest;
@@ -27,20 +31,19 @@ public class UserController {
      * @return 新用户 id
      */
     @PostMapping("/register")
-    public Long userRegister(@RequestBody UserRegisterRequest userRegisterRequest) {
+    public BaseResponse<Long> userRegister(@RequestBody UserRegisterRequest userRegisterRequest) {
         if (userRegisterRequest == null) {
-            // TODO 修改为自定义异常（请求参数为空）
-            return null;
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         String userAccount = userRegisterRequest.getUserAccount();
         String userPassword = userRegisterRequest.getUserPassword();
         String checkPassword = userRegisterRequest.getCheckPassword();
         String planetCode = userRegisterRequest.getPlanetCode();
         if (StringUtils.isAnyBlank(userAccount, userPassword, checkPassword, planetCode)) {
-            // TODO 修改为自定义异常（请求参数错误）
-            return null;
+            throw new BusinessException(ErrorCode.PARAMS_NULL);
         }
-        return userService.userRegister(userAccount, userPassword, checkPassword, planetCode);
+        long result = userService.userRegister(userAccount, userPassword, checkPassword, planetCode);
+        return ResultUtils.success(result, "用户注册成功");
     }
 
     /**
@@ -51,18 +54,17 @@ public class UserController {
      * @return 脱敏后的用户信息
      */
     @PostMapping("/login")
-    public User userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request) {
+    public BaseResponse<User> userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request) {
         if (userLoginRequest == null) {
-            // TODO 修改为自定义异常（请求参数为空）
-            return null;
+            throw new BusinessException(ErrorCode.PARAMS_NULL);
         }
         String userAccount = userLoginRequest.getUserAccount();
         String userPassword = userLoginRequest.getUserPassword();
         if (StringUtils.isAnyBlank(userAccount, userPassword)) {
-            // TODO 修改为自定义异常（请求参数错误）
-            return null;
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        return userService.userLogin(userAccount, userPassword, request);
+        User user = userService.userLogin(userAccount, userPassword, request);
+        return ResultUtils.success(user, "用户登录成功");
     }
 
     /**
@@ -73,12 +75,12 @@ public class UserController {
      * @return 查询到的用户
      */
     @GetMapping("/search")
-    public List<User> searchUsers(@RequestParam String username, HttpServletRequest request) {
+    public BaseResponse<List<User>> searchUsers(@RequestParam String username, HttpServletRequest request) {
         if (StringUtils.isAnyBlank(username)) {
-            // TODO 修改为自定义异常（请求参数为空）
-            return null;
+            throw new BusinessException(ErrorCode.PARAMS_NULL);
         }
-        return userService.searchUsers(username, request);
+        List<User> userList = userService.searchUsers(username, request);
+        return ResultUtils.success(userList, "用户查询成功");
     }
 
     /**
@@ -89,12 +91,12 @@ public class UserController {
      * @return boolean 删除结果（true - 删除成功 false - 删除失败）
      */
     @PostMapping("/delete")
-    public boolean deleteUser(@RequestParam long id, HttpServletRequest request) {
+    public BaseResponse<Boolean> deleteUser(@RequestParam long id, HttpServletRequest request) {
         if (id < 0) {
-            // TODO 修改为自定义异常（请求参数错误）
-            return false;
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        return userService.deleteUser(id, request);
+        boolean result = userService.deleteUser(id, request);
+        return ResultUtils.success(result, "用户删除成功");
     }
 
     /**
@@ -104,13 +106,12 @@ public class UserController {
      * @return 当前登录的用户信息
      */
     @GetMapping("/currentUser")
-    public User getCurrentUser(HttpServletRequest request) {
+    public BaseResponse<User> getCurrentUser(HttpServletRequest request) {
         if (request == null) {
-            // TODO 修改为自定义异常（请求参数错误）
-            return null;
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         User user = userService.getCurrentUser(request);
-        return user;
+        return ResultUtils.success(user, "获取当前用户信息成功");
     }
 
     /**
@@ -120,13 +121,12 @@ public class UserController {
      * @return true - 注销成功 false - 注销失败
      */
     @PostMapping("/outLogin")
-    public boolean userLogout(HttpServletRequest request) {
+    public BaseResponse<Boolean> userLogout(HttpServletRequest request) {
         if (request == null) {
-            // TODO 修改为自定义异常（请求参数错误）
-            return false;
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         boolean result = userService.userLogout(request);
-        return result;
+        return ResultUtils.success(result, "用户注销成功");
     }
 
 }
