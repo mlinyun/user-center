@@ -157,8 +157,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      */
     private void validateUniqueFields(String userAccount, String planetCode) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq(UserConstant.USER_TABLE_FIELD_USER_ACCOUNT, userAccount).or()
-            .eq(UserConstant.USER_TABLE_FIELD_PLANET_CODE, planetCode);
+        // 只检查未被逻辑删除的用户，允许软删除用户的账号/星球编号被重新注册
+        queryWrapper.eq(UserConstant.USER_TABLE_FIELD_IS_DELETED, 0)
+            .and(wrapper -> wrapper.eq(UserConstant.USER_TABLE_FIELD_USER_ACCOUNT, userAccount).or()
+                .eq(UserConstant.USER_TABLE_FIELD_PLANET_CODE, planetCode));
         long count = this.baseMapper.selectCount(queryWrapper);
         if (count > 0) {
             throw new BusinessException(ResultCodeEnum.PARAM_ERROR, "登录账号或星球编号已存在");

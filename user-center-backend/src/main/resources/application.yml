@@ -5,12 +5,6 @@ spring:
   profiles:
     # 默认激活的配置文件
     active: dev
-  datasource:
-    # MySQL 驱动类
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  session:
-    # Session 失效时间，单位为秒（1天）
-    timeout: 86400
   servlet:
     multipart:
       # 开启文件上传
@@ -20,26 +14,32 @@ spring:
       # 单次请求最大大小
       max-request-size: 10MB
 
-# 文件上传配置
-file:
-  upload:
-    # 文件上传根目录
-    upload-dir: ./uploads
-    # 头像上传子目录
-    avatar-dir: avatar
-    # 允许的文件类型
-    allowed-types: image/jpeg,image/png,image/jpg,image/gif
-    # 最大文件大小（字节）2MB
-    max-size: 2097152
-    # 访问路径前缀
-    access-prefix: http://localhost:8100/api/file
-
 # 服务器配置
 server:
   port: 8100
   servlet:
+    session:
+      # 会话超时时间，单位秒（24小时）
+      timeout: 86400s
     # 应用上下文路径
     context-path: /api
+  tomcat:
+    threads:
+      # Tomcat 最大工作线程数（处理并发请求的线程上限）
+      max: 200
+      # 保持的最小空闲线程数，用于快速响应新请求
+      min-spare: 10
+    # 当所有工作线程都被占用时，操作系统内核在接受队列允许排队的最大连接数（等待被 Tomcat 线程取走）。如果队列满，新连接会被拒绝（客户端连接失败或被阻塞）
+    accept-count: 100
+    # Tomcat 可保持的最大并发连接数（包含正在处理和等待的）
+    max-connections: 8192
+  compression:
+    # 启用 HTTP 响应压缩（Content-Encoding: gzip/deflate），可以显著减少响应体积，减少带宽与客户端加载时间
+    enabled: true
+    # 指定需要压缩的响应内容类型（MIME 类型）
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,text/css,text/javascript,application/javascript
+    # 当响应内容的大小（Content-Length）≥ 1024 字节时，Tomcat 才会对响应进行 gzip 压缩
+    min-response-size: 1024
 
 # 日志配置
 logging:

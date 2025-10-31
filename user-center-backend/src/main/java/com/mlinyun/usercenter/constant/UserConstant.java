@@ -126,8 +126,8 @@ public final class UserConstant {
     public static final String USER_TABLE_FIELD_CREATE_TIME = "create_time";
 
     /**
-     * 用户表字段 - 更新时间
+     * 用户表字段 - 逻辑删除
      */
-    public static final String USER_TABLE_FIELD_UPDATE_TIME = "update_time";
+    public static final String USER_TABLE_FIELD_IS_DELETED = "is_delete";
 
 }

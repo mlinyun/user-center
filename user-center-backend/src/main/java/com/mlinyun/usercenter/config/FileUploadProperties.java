@@ -6,16 +6,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 文件上传配置类
+ * 文件上传配置属性类
  *
  * <p>
- * 用于配置文件上传相关的属性
+ * 类用于绑定文件上传相关的配置属性，如上传目录、允许的文件类型等
  * </p>
  */
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "file.upload")
-public class FileUploadConfig {
+public class FileUploadProperties {
 
     /**
      * 文件上传根目录

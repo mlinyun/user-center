@@ -4,6 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.mlinyun.usercenter.annotation.AuthCheck;
+import com.mlinyun.usercenter.annotation.RateLimit;
 import com.mlinyun.usercenter.common.BaseResponse;
 import com.mlinyun.usercenter.common.ResultCodeEnum;
 import com.mlinyun.usercenter.common.ResultUtils;
@@ -61,6 +62,7 @@ public class UserController {
     @ApiOperationSupport(author = "LingYun")
     @PostMapping("/register")
     @Operation(summary = "用户注册", description = "用户注册接口")
+    @RateLimit(seconds = 300, maxCount = 3, limitType = RateLimit.LimitType.IP)
     public BaseResponse<Long> userRegister(@RequestBody @Valid UserRegisterRequest userRegisterRequest) {
         ThrowUtils.throwIf(ObjectUtil.isEmpty(userRegisterRequest), ResultCodeEnum.PARAM_ERROR);
         long userId = userService.userRegister(userRegisterRequest);
@@ -77,6 +79,7 @@ public class UserController {
     @ApiOperationSupport(author = "LingYun")
     @PostMapping("/login")
     @Operation(summary = "用户登录", description = "用户登录接口")
+    @RateLimit(seconds = 60, maxCount = 5, limitType = RateLimit.LimitType.IP)
     public BaseResponse<UserLoginVO> userLogin(@RequestBody @Valid UserLoginRequest userLoginRequest,
         HttpServletRequest request) {
         ThrowUtils.throwIf(ObjectUtil.isEmpty(userLoginRequest), ResultCodeEnum.PARAM_ERROR);
@@ -141,6 +144,7 @@ public class UserController {
     @ApiOperationSupport(author = "LingYun")
     @PostMapping("/updatePassword")
     @Operation(summary = "用户重置密码", description = "用户重置密码接口")
+    @RateLimit(seconds = 300, maxCount = 3, limitType = RateLimit.LimitType.USER)
     public BaseResponse<Boolean> updateUserPassword(
         @RequestBody @Valid UserUpdatePasswordRequest userUpdatePasswordRequest, HttpServletRequest request) {
         ThrowUtils.throwIf(ObjectUtil.isEmpty(userUpdatePasswordRequest), ResultCodeEnum.PARAM_ERROR);
@@ -206,6 +210,7 @@ public class UserController {
     @ApiOperationSupport(author = "LingYun")
     @PostMapping("/adminUpdateUserInfo")
     @AuthCheck(mustRole = UserConstant.ADMIN_USER_ROLE)
+    @RateLimit(seconds = 60, maxCount = 20, limitType = RateLimit.LimitType.USER)
     @Operation(summary = "管理员更新用户信息", description = "管理员更新用户信息接口")
     public BaseResponse<Boolean>
         adminUpdateUserInfo(@RequestBody @Valid AdminUpdateUserInfoRequest adminUpdateUserInfoRequest) {
@@ -223,6 +228,7 @@ public class UserController {
     @ApiOperationSupport(author = "LingYun")
     @PostMapping("/adminGetUserInfoByPage")
     @AuthCheck(mustRole = UserConstant.ADMIN_USER_ROLE)
+    @RateLimit(seconds = 60, maxCount = 30, limitType = RateLimit.LimitType.USER)
     @Operation(summary = "管理员分页获取用户列表", description = "管理员分页获取用户列表接口")
     public BaseResponse<Page<UserVO>>
         adminGetUserInfoByPage(@RequestBody @Valid AdminQueryUserRequest adminQueryUserRequest) {
@@ -241,6 +247,7 @@ public class UserController {
     @PostMapping("/adminResetUserPassword")
     @AuthCheck(mustRole = UserConstant.ADMIN_USER_ROLE)
     @Operation(summary = "管理员重置用户密码", description = "管理员重置用户密码接口")
+    @RateLimit(seconds = 60, maxCount = 10, limitType = RateLimit.LimitType.USER)
     public BaseResponse<Boolean>
         adminResetUserPassword(@RequestBody @Valid AdminResetUserPasswordRequest adminResetUserPasswordRequest) {
         ThrowUtils.throwIf(ObjectUtil.isEmpty(adminResetUserPasswordRequest), ResultCodeEnum.PARAM_ERROR);
@@ -257,6 +264,7 @@ public class UserController {
     @ApiOperationSupport(author = "LingYun")
     @PostMapping("/adminBanOrUnbanUser")
     @AuthCheck(mustRole = UserConstant.ADMIN_USER_ROLE)
+    @RateLimit(seconds = 60, maxCount = 15, limitType = RateLimit.LimitType.USER)
     @Operation(summary = "管理员封禁或解封用户", description = "管理员封禁或解封用户接口")
     public BaseResponse<Boolean>
         adminBanOrUnbanUser(@RequestBody @Valid AdminBanOrUnbanUserRequest adminBanOrUnbanUserRequest) {

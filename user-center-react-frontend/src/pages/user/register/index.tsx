@@ -148,9 +148,9 @@ const Register: React.FC = () => {
                     message: '星球编号是必填项！',
                   },
                   {
-                    max: 5,
+                    max: 6,
                     type: 'string',
-                    message: '星球编号长度不大于 5 位！',
+                    message: '星球编号长度不大于 6 位！',
                   },
                 ]}
               />
