@@ -16,11 +16,16 @@
     "lint:eslint": "eslint . --fix --cache",
     "lint": "run-s lint:*",
     "format": "prettier --write src/",
-    "stylelint": "stylelint \"src/**/*.{vue,css,scss}\" --fix"
+    "stylelint": "stylelint \"src/**/*.{vue,css,scss}\" --fix",
+    "openapi2ts": "openapi2ts"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
     "ant-design-vue": "~4.2.6",
+    "axios": "^1.13.1",
+    "dayjs": "^1.11.19",
     "pinia": "^3.0.3",
+    "tslib": "^2.8.1",
     "vue": "^3.5.22",
     "vue-router": "^4.6.3"
   },
@@ -28,6 +33,7 @@
     "@prettier/plugin-oxc": "^0.0.4",
     "@tsconfig/node22": "^22.0.2",
     "@types/node": "^22.18.11",
+    "@umijs/openapi": "^1.14.1",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.6.0",

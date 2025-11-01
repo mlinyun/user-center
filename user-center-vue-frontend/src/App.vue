@@ -1,84 +1,36 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
-</script>
-
 <template>
-    <header>
-        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-        <div class="wrapper">
-            <HelloWorld msg="You did it!" />
-
-            <nav>
-                <RouterLink to="/">Home</RouterLink>
-                <RouterLink to="/about">About</RouterLink>
-            </nav>
-        </div>
-    </header>
-
-    <RouterView />
+    <div id="main">
+        <a-config-provider :locale="locale">
+            <!-- 根据路由 meta.layout 决定是否显示布局 -->
+            <BasicLayout v-if="showLayout" />
+            <!-- 不需要布局的页面直接渲染 -->
+            <router-view v-else />
+        </a-config-provider>
+    </div>
 </template>
 
-<style scoped>
-header {
-    max-height: 100vh;
-    line-height: 1.5;
-}
+<script setup lang="ts">
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+import zhCN from "ant-design-vue/es/locale/zh_CN";
+import dayjs from "dayjs";
+import "dayjs/locale/zh-cn";
+import BasicLayout from "./layouts/BasicLayout.vue";
+import useLoginUserStore from "./stores/modules/useLoginUserStore";
 
-.logo {
-    display: block;
-    margin: 0 auto 2rem;
-}
+dayjs.locale("zh-cn");
 
-nav {
-    width: 100%;
-    margin-top: 2rem;
-    font-size: 12px;
-    text-align: center;
-}
+const locale = zhCN;
+const route = useRoute();
 
-nav a.router-link-exact-active {
-    color: var(--color-text);
-}
+const loginUserStore = useLoginUserStore();
+loginUserStore.fetchLoginUser();
 
-nav a.router-link-exact-active:hover {
-    background-color: transparent;
-}
+// 根据路由 meta.layout 判断是否显示布局
+// 默认为 true，除非明确设置为 false（登录、注册页面）
+const showLayout = computed(() => {
+    return route.meta?.layout !== false;
+});
+</script>
 
-nav a {
-    display: inline-block;
-    padding: 0 1rem;
-    border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-    border: 0;
-}
-
-@media (width >= 1024px) {
-    header {
-        display: flex;
-        place-items: center;
-        padding-right: calc(var(--section-gap) / 2);
-    }
-
-    .logo {
-        margin: 0 2rem 0 0;
-    }
-
-    header .wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        place-items: flex-start;
-    }
-
-    nav {
-        padding: 1rem 0;
-        margin-top: 1rem;
-        margin-left: -1rem;
-        font-size: 1rem;
-        text-align: left;
-    }
-}
-</style>
+<style scoped></style>
