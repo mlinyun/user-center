@@ -96,7 +96,7 @@ const Footer: React.FC = () => {
           rel="noopener noreferrer"
           style={{ color: 'rgba(0, 0, 0, 0.45)', textDecoration: 'none' }}
         >
-          粤ICP备xxxxxxxx号
+          粤ICP备2025419292号-1
         </a>
       </div>
     </footer>

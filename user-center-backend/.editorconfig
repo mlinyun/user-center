@@ -32,5 +32,5 @@ trim_trailing_whitespace = false
 
 # 针对特定文件类型的特殊配置
 [*.{yml,yaml}]
-# 对于JSON、YAML文件，将缩进空格数设置为2，以符合这些文件通常的缩进标准
+# 对于YAML文件，将缩进空格数设置为2，以符合这些文件通常的缩进标准
 indent_size = 2
