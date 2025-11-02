@@ -16,12 +16,8 @@ const checkResult = ref<string>("");
 health()
     .then((res) => {
         console.log(res);
-        console.log(res.data);
-        console.log(res.data.code);
-        console.log(res.data.message);
-        console.log(res.data.data);
-        if (res.data.code === 20000 && res.data.success === true) {
-            checkResult.value = res.data.message as string;
+        if (res.code === 20000 && res.data) {
+            checkResult.value = res.message as string;
         } else {
             checkResult.value = "健康检查失败";
         }

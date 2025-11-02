@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { getLoginUserInfo, userLogin, userLogout } from "@/api/userController";
-import { BusinessCode } from "@/libs/request";
+import { getLoginUserInfo, userLogin, userLogout } from "@/api/user.ts";
+import { BusinessCode } from "@/constants/request";
 
 /**
  * 存储登录用户信息状态

@@ -105,7 +105,7 @@ import { UserOutlined, LockOutlined, FieldNumberOutlined } from "@ant-design/ico
 import { message } from "ant-design-vue";
 import type { Rule } from "ant-design-vue/es/form";
 import GlobalFooter from "@/components/global/GlobalFooter.vue";
-import { userRegister } from "@/api/userController";
+import { userRegister } from "@/api/user.ts";
 import { ROUTER_CONSTANTS } from "@/constants/router";
 import { SYSTEM_LOGO, SYSTEM_TITLE, SYSTEM_SUBTITLE } from "@/constants/system.ts";
 

@@ -1,8 +1,10 @@
-import * as userController from "./userController";
-import * as fileController from "./fileController";
-import * as mainController from "./health.ts";
+import * as health from "./health.ts";
+import * as user from "./user.ts";
+import * as file from "./file.ts";
+import * as admin from "./admin.ts";
 export default {
-    userController,
-    fileController,
-    mainController,
+    health,
+    user,
+    file,
+    admin,
 };

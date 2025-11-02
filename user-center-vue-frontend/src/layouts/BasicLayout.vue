@@ -26,8 +26,8 @@
                                 <div class="user-info">
                                     <a-avatar :src="loginUser.userAvatar || DEFAULT_AVATAR" />
                                     <span class="user-name">{{
-                                            loginUser.userName || "用户"
-                                        }}</span>
+                                        loginUser.userName || "用户"
+                                    }}</span>
                                 </div>
                                 <template #overlay>
                                     <a-menu @click="handleMenuClick">
