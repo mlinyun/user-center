@@ -73,12 +73,12 @@ const footerLinks = [
 
 <style scoped>
 .global-footer {
-    text-align: center;
     padding: 16px 50px;
-    color: rgba(0, 0, 0, 0.45);
     font-size: 13px;
+    color: rgb(0 0 0 / 45%);
+    text-align: center;
     background: transparent;
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-top: 1px solid rgb(0 0 0 / 6%);
 }
 
 /* 链接区域 */
@@ -87,12 +87,12 @@ const footerLinks = [
 }
 
 .footer-link {
-    color: rgba(0, 0, 0, 0.45);
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    color: rgb(0 0 0 / 45%);
     text-decoration: none;
     transition: color 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
 }
 
 .footer-link:hover {
@@ -101,20 +101,20 @@ const footerLinks = [
 
 /* 版权和备案信息 */
 .footer-copyright {
-    font-size: 12px;
-    color: rgba(0, 0, 0, 0.45);
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-wrap: wrap;
     gap: 4px;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: rgb(0 0 0 / 45%);
 }
 
 .author-link {
-    color: rgba(0, 0, 0, 0.65);
-    text-decoration: none;
-    font-weight: 400;
     margin: 0 4px;
+    font-weight: 400;
+    color: rgb(0 0 0 / 65%);
+    text-decoration: none;
 }
 
 .author-link:hover {
@@ -122,7 +122,7 @@ const footerLinks = [
 }
 
 .beian-link {
-    color: rgba(0, 0, 0, 0.45);
+    color: rgb(0 0 0 / 45%);
     text-decoration: none;
 }
 

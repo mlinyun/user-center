@@ -193,36 +193,36 @@ const handleRegister = async () => {
 
 <style scoped>
 .register-page {
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    min-height: 100vh;
     background-image: url("/login_bg.svg");
-    background-size: 100% 100%;
     background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 .register-container {
-    width: 100%;
-    max-width: 500px;
-    padding: 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    max-width: 500px;
+    padding: 32px;
 }
 
 .register-header {
-    text-align: center;
-    margin-bottom: 32px;
     width: 100%;
+    margin-bottom: 32px;
+    text-align: center;
 }
 
 .register-header .logo-title {
     display: flex;
+    gap: 12px;
     align-items: center;
     justify-content: center;
-    gap: 12px;
     margin-bottom: 12px;
 }
 
@@ -232,23 +232,23 @@ const handleRegister = async () => {
 }
 
 .title {
+    margin: 0;
     font-size: 28px;
     font-weight: 600;
     color: #001529;
-    margin: 0;
 }
 
 .subtitle {
-    font-size: 14px;
-    color: #666;
     margin: 0;
+    font-size: 14px;
     line-height: 1.5;
+    color: #666;
 }
 
 .register-card {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
     width: 90%;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
 }
 
 .footer {

@@ -1,3 +1,5 @@
+-- 请使用 user_center_user 用户执行下面的 SQL 脚本
+
 -- 使用 user_center 数据库
 USE `user_center`;
 
@@ -29,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `user`
     create_time   DATETIME               DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     update_time   DATETIME               DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
 
-    is_delete     BIGINT(20)             DEFAULT 0      NOT NULL COMMENT '逻辑删除（0: 未删 1: UNIX_TIMESTAMP()）',
+    is_delete     BIGINT UNSIGNED        DEFAULT 0      NOT NULL COMMENT '逻辑删除（0: 未删 1: UNIX_TIMESTAMP()）',
 
     -- 唯一索引：确保账号在未删除状态下唯一
     UNIQUE KEY uk_user_account (user_account, is_delete) COMMENT '登录账号唯一索引（考虑逻辑删除）',
