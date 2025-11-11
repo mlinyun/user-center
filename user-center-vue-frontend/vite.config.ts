@@ -12,7 +12,9 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url))
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "@components": fileURLToPath(new URL("./src/components", import.meta.url)),
+      "@utils": fileURLToPath(new URL("./src/utils", import.meta.url)),
     },
   },
   // 配置开发服务器
@@ -30,6 +32,6 @@ export default defineConfig({
   },
   // 配置环境变量
   define: {
-    "process.env": { ...process.env },
+    "process.env.VITE_API_URL": JSON.stringify(process.env.VITE_API_URL || "/api"),
   }
 })

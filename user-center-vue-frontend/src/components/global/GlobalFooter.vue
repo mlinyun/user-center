@@ -53,13 +53,13 @@ const footerLinks = [
     {
         key: "backend",
         title: "项目源码",
-        href: GITHUB_URL + "/user-center",
+        href: GITHUB_URL,
         icon: GithubOutlined,
     },
     {
         key: "docs",
         title: "项目文档",
-        href: GITHUB_URL + "/user-center/blob/main/README.md",
+        href: GITHUB_URL + "/blob/main/README.md",
         icon: GlobalOutlined,
     },
     {

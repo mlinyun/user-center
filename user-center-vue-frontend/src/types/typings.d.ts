@@ -61,6 +61,8 @@ declare namespace API {
      * 用户登录请求类型
      */
     type UserLoginRequest = {
+        /** 是否自动登录 */
+        autoLogin?: boolean;
         /** 登录账号 */
         userAccount: string;
         /** 登录密码 */

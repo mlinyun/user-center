@@ -118,11 +118,11 @@ const activeKey = ref("account");
 const loading = ref(false);
 
 // 注册表单
-const registerForm = reactive({
+const registerForm = reactive<API.UserRegisterRequest>({
     userAccount: "",
-    planetCode: "",
     userPassword: "",
     checkPassword: "",
+    planetCode: "",
 });
 
 // 自定义验证器 - 确认密码
@@ -163,15 +163,17 @@ const registerRules: Record<string, Rule[]> = {
 const handleRegister = async () => {
     loading.value = true;
     try {
-        const res = await userRegister({
+        // 构造注册请求参数
+        const userRegisterRequest: API.UserRegisterRequest = {
             userAccount: registerForm.userAccount,
             userPassword: registerForm.userPassword,
             checkPassword: registerForm.checkPassword,
             planetCode: registerForm.planetCode,
-        });
-
-        if (res.data.code === 0 && res.data.data) {
-            const userId = BigInt(res.data.data);
+        };
+        // 调用注册接口
+        const res = await userRegister(userRegisterRequest);
+        if (res.code === 20000 && res.data) {
+            const userId = BigInt(res.data);
             if (userId > 0n) {
                 message.success("注册成功!");
                 // 跳转到登录页
@@ -180,10 +182,10 @@ const handleRegister = async () => {
                 message.error("注册失败,请重试!");
             }
         } else {
-            message.error(res.data.message || "注册失败,请重试!");
+            message.error(res.message || "注册失败,请重试!");
         }
     } catch (error) {
-        console.error("注册错误:", error);
+        console.error("注册异常:", error);
         message.error("注册失败,请重试!");
     } finally {
         loading.value = false;

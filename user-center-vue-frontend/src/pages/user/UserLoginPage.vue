@@ -126,10 +126,12 @@ const loginRules: Record<string, Rule[]> = {
 const handleLogin = async () => {
     loading.value = true;
     try {
-        const success = await loginUserStore.doLogin(loginForm.userAccount, loginForm.userPassword);
-
-        console.log("登录结果:", success);
-
+        const userLoginRequest: API.UserLoginRequest = {
+            autoLogin: autoLogin.value,
+            userAccount: loginForm.userAccount,
+            userPassword: loginForm.userPassword,
+        };
+        const success = await loginUserStore.doLogin(userLoginRequest);
         if (success) {
             message.success("登录成功!");
             // 跳转到重定向页面或首页
@@ -139,7 +141,7 @@ const handleLogin = async () => {
             message.error("登录失败,请检查账号密码!");
         }
     } catch (error) {
-        console.error("登录错误:", error);
+        console.error("登录异常:", error);
         message.error("登录失败,请重试!");
     } finally {
         loading.value = false;

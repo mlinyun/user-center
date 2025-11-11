@@ -7,6 +7,7 @@
         :width="200"
         :collapsed-width="64"
         :style="{ borderRight: '1px solid #f0f0f0' }"
+        class="sidebar-fixed"
     >
         <!-- 菜单 -->
         <a-menu
@@ -117,6 +118,12 @@ const handleMenuClick = ({ key }: { key: string }) => {
 </script>
 
 <style scoped>
+.sidebar-fixed {
+    position: sticky;
+    top: 0;
+    height: calc(100vh - 64px);
+}
+
 .collapse-trigger {
     height: 48px;
     font-size: 16px;
@@ -147,5 +154,13 @@ const handleMenuClick = ({ key }: { key: string }) => {
 :deep(.ant-menu-item-selected) {
     color: #1890ff;
     background-color: rgb(24 144 255 / 10%);
+}
+
+:deep(.ant-menu-inline) {
+    border-inline-end: none !important;
+}
+
+:deep(.ant-menu-vertical) {
+    border-inline-end: none !important;
 }
 </style>
