@@ -25,7 +25,7 @@
                             <div class="user-info">
                                 <a-avatar
                                     :src="loginUser.userAvatar || DEFAULT_AVATAR"
-                                    size="small"
+                                    size="normal"
                                 />
                                 <span class="user-name">{{ loginUser.userName || "用户" }}</span>
                                 <DownOutlined class="dropdown-icon" />
@@ -143,7 +143,7 @@ const goToRegister = async () => {
     height: 64px;
     padding: 0;
     line-height: 64px;
-    background: #fff;
+    background: rgb(255 255 255 / 80%);
     box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
 }
 
@@ -207,7 +207,7 @@ const goToRegister = async () => {
     display: flex;
     gap: 8px;
     align-items: center;
-    padding: 4px 12px;
+    padding: 0 12px;
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.3s ease;

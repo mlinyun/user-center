@@ -57,17 +57,13 @@ const useLoginUserStore = defineStore("loginUser", () => {
      * 使用账号密码进行登录
      * API 返回 BaseResponseUserLoginVO，需要从 data 字段提取实际用户信息
      *
-     * @param {string} userAccount - 用户账号
-     * @param {string} userPassword - 用户密码
+     * @param userLoginRequest - 用户登录请求体，详见 {@link API.UserLoginRequest}（包含登陆账号与登陆密码）
      * @returns {boolean} 登录成功返回 true，失败返回 false
      */
-    async function doLogin(userAccount: string, userPassword: string): Promise<boolean> {
+    async function doLogin(userLoginRequest: API.UserLoginRequest): Promise<boolean> {
         try {
             // API 返回 BaseResponseUserLoginVO，需要获取 data 字段
-            const response = await userLogin({
-                userAccount,
-                userPassword,
-            });
+            const response = await userLogin(userLoginRequest);
 
             // 检查响应的 data 字段中是否有有效的用户信息
             if (response?.data && response.data.id) {

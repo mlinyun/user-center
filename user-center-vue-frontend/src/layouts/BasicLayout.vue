@@ -33,26 +33,27 @@ import GlobalFooter from "@/components/global/GlobalFooter.vue";
 
 <style scoped>
 .basic-layout {
+    min-height: 100vh;
     background: #f5f5f5;
 }
 
 .main-content {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    padding: 24px;
+    /* 减去顶部导航栏高度 */
+    height: calc(100vh - 64px);
     overflow-y: auto;
     background: #f5f5f5;
 }
 
 .content-wrapper {
-    flex: 1;
-    min-height: 280px;
-    padding: 24px;
-    margin-bottom: 16px;
+    padding: 32px;
     background: #fff;
     border-radius: 4px;
     box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
+}
+
+/* 覆盖全局页脚背景颜色 */
+.global-footer {
+    background: white;
 }
 
 /* 响应式设计 */
