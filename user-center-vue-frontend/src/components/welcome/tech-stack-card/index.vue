@@ -17,6 +17,8 @@
 </template>
 
 <script setup lang="ts">
+defineOptions({ name: "TechStackCard" });
+
 /**
  * 技术栈卡片组件
  */

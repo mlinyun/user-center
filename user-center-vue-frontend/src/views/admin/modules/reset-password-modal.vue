@@ -67,7 +67,7 @@ import { reactive, ref, watch } from "vue";
 import type { FormInstance } from "ant-design-vue";
 import type { Rule } from "ant-design-vue/es/form";
 import { KeyOutlined, LockOutlined, SafetyOutlined } from "@ant-design/icons-vue";
-import { useUserOperations } from "@/pages/admin/hooks/useUserOperations";
+import { useUserOperations } from "@/views/admin/hooks/useUserOperations";
 import { PASSWORD_PATTERN } from "@/constants/validation";
 
 const props = defineProps<{

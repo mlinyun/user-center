@@ -158,7 +158,7 @@ import {
     CameraOutlined,
 } from "@ant-design/icons-vue";
 import { USER_ROLE } from "@/constants/system";
-import { useUserOperations } from "@/pages/admin/hooks/useUserOperations";
+import { useUserOperations } from "@/views/admin/hooks/useUserOperations";
 
 const props = defineProps<{
     visible: boolean;

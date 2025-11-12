@@ -37,8 +37,10 @@ import {
     MenuFoldOutlined,
 } from "@ant-design/icons-vue";
 import type { MenuProps } from "ant-design-vue";
-import useLoginUserStore from "@/stores/modules/useLoginUserStore";
-import { routes } from "@/router/routes";
+import useLoginUserStore from "@/stores/modules/useLoginUserStore.ts";
+import { routes } from "@/router/routes.ts";
+
+defineOptions({ name: "GlobalSidebar" });
 
 const router = useRouter();
 const route = useRoute();

@@ -93,7 +93,7 @@
         </div>
 
         <div class="footer">
-            <GlobalFooter />
+            <Index />
         </div>
     </div>
 </template>
@@ -104,10 +104,12 @@ import { useRouter } from "vue-router";
 import { UserOutlined, LockOutlined, FieldNumberOutlined } from "@ant-design/icons-vue";
 import { message } from "ant-design-vue";
 import type { Rule } from "ant-design-vue/es/form";
-import GlobalFooter from "@/components/global/GlobalFooter.vue";
+import Index from "@components/global/footer/index.vue";
 import { userRegister } from "@/api/user.ts";
-import { ROUTER_CONSTANTS } from "@/constants/router";
+import { ROUTER_CONSTANTS } from "@/constants/router.ts";
 import { SYSTEM_LOGO, SYSTEM_TITLE, SYSTEM_SUBTITLE } from "@/constants/system.ts";
+
+defineOptions({ name: "UserRegisterPage" });
 
 const router = useRouter();
 

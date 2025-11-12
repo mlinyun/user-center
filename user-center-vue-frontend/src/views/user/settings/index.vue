@@ -283,10 +283,12 @@ import {
     WarningOutlined,
 } from "@ant-design/icons-vue";
 import type { Rule } from "ant-design-vue/es/form";
-import useLoginUserStore from "@/stores/modules/useLoginUserStore";
-import { uploadAvatar } from "@/api/file";
-import { updateUserInfo, updateUserPassword } from "@/api/user";
-import { ROUTER_CONSTANTS } from "@/constants/router";
+import useLoginUserStore from "@/stores/modules/useLoginUserStore.ts";
+import { uploadAvatar } from "@/api/file.ts";
+import { updateUserInfo, updateUserPassword } from "@/api/user.ts";
+import { ROUTER_CONSTANTS } from "@/constants/router.ts";
+
+defineOptions({ name: "SettingPage" });
 
 const router = useRouter();
 const loginUserStore = useLoginUserStore();

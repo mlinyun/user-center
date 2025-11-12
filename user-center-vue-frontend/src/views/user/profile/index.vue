@@ -182,8 +182,10 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import { UserOutlined, PhoneOutlined, MailOutlined } from "@ant-design/icons-vue";
-import useLoginUserStore from "@/stores/modules/useLoginUserStore";
-import GenderDisplay from "@/pages/user/components/GenderDisplay.vue";
+import useLoginUserStore from "@/stores/modules/useLoginUserStore.ts";
+import GenderDisplay from "@/views/user/profile/modules/gender-display.vue";
+
+defineOptions({ name: "ProfilePage" });
 
 const loginUserStore = useLoginUserStore();
 const loading = ref(false);

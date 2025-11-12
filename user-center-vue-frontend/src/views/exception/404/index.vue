@@ -10,7 +10,9 @@
 
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import { ROUTER_CONSTANTS } from "@/constants/router";
+import { ROUTER_CONSTANTS } from "@/constants/router.ts";
+
+defineOptions({ name: "NotFoundPage" });
 
 const router = useRouter();
 

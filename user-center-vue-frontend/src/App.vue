@@ -15,7 +15,7 @@ import { useRoute } from "vue-router";
 import zhCN from "ant-design-vue/es/locale/zh_CN";
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
-import BasicLayout from "./layouts/BasicLayout.vue";
+import BasicLayout from "./layouts/basic-layout/index.vue";
 
 /**
  * 应用根组件 (App.vue)

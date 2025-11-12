@@ -78,9 +78,11 @@ import {
     DownOutlined,
 } from "@ant-design/icons-vue";
 import { message } from "ant-design-vue";
-import useLoginUserStore from "@/stores/modules/useLoginUserStore";
-import { ROUTER_CONSTANTS } from "@/constants/router";
-import { SYSTEM_LOGO, SYSTEM_TITLE, GITHUB_URL, DEFAULT_AVATAR } from "@/constants/system";
+import useLoginUserStore from "@/stores/modules/useLoginUserStore.ts";
+import { ROUTER_CONSTANTS } from "@/constants/router.ts";
+import { SYSTEM_LOGO, SYSTEM_TITLE, GITHUB_URL, DEFAULT_AVATAR } from "@/constants/system.ts";
+
+defineOptions({ name: "GlobalHeader" });
 
 const router = useRouter();
 const loginUserStore = useLoginUserStore();

@@ -42,8 +42,10 @@
 
 <script setup lang="ts">
 import { GithubOutlined, GlobalOutlined, MailOutlined } from "@ant-design/icons-vue";
-import { getCurrentYear } from "@/utils/date";
+import { getCurrentYear } from "@utils/date.ts";
 import { GITHUB_URL } from "@/constants/system.ts";
+
+defineOptions({ name: "GlobalFooter" });
 
 // 获取当前年份
 const currentYear: number = getCurrentYear();

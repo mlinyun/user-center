@@ -323,13 +323,15 @@ import {
     MoreOutlined,
     ExclamationCircleOutlined,
 } from "@ant-design/icons-vue";
-import { USER_ROLE, USER_STATUS } from "@/constants/system";
-import { adminGetUserInfoByPage } from "@/api/admin";
-import { useUserOperations } from "@/pages/admin/hooks/useUserOperations";
-import CreateUserModal from "@/pages/admin/components/CreateUserModal.vue";
-import EditUserModal from "@/pages/admin/components/EditUserModal.vue";
-import ResetPasswordModal from "@/pages/admin/components/ResetPasswordModal.vue";
-import ViewUserDrawer from "@/pages/admin/components/ViewUserDrawer.vue";
+import { USER_ROLE, USER_STATUS } from "@/constants/system.ts";
+import { adminGetUserInfoByPage } from "@/api/admin.ts";
+import { useUserOperations } from "@/views/admin/hooks/useUserOperations.ts";
+import CreateUserModal from "@/views/admin/modules/create-user-modal.vue";
+import EditUserModal from "@/views/admin/modules/edit-user-modal.vue";
+import ResetPasswordModal from "@/views/admin/modules/reset-password-modal.vue";
+import ViewUserDrawer from "@/views/admin/modules/view-user-drawer.vue";
+
+defineOptions({ name: "UserManagePage" });
 
 type SortState = {
     field: string;

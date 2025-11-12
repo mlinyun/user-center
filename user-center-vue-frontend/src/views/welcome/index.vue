@@ -114,7 +114,7 @@
             </template>
             <a-row :gutter="[24, 24]">
                 <a-col v-for="stack in techStacks" :key="stack.title" :xs="24" :lg="8">
-                    <TechStackCard v-bind="stack" />
+                    <TechStack v-bind="stack" />
                 </a-col>
             </a-row>
         </a-card>
@@ -131,10 +131,12 @@ import {
     RocketOutlined,
     BookOutlined,
 } from "@ant-design/icons-vue";
-import useLoginUserStore from "@/stores/modules/useLoginUserStore";
-import { GITHUB_URL } from "@/constants/system";
-import FeatureCard from "@components/welcome/FeatureCard.vue";
-import TechStackCard from "@components/welcome/TechStackCard.vue";
+import useLoginUserStore from "@/stores/modules/useLoginUserStore.ts";
+import { GITHUB_URL } from "@/constants/system.ts";
+import FeatureCard from "@components/welcome/feature-card/index.vue";
+import TechStack from "@components/welcome/tech-stack-card/index.vue";
+
+defineOptions({ name: "WelcomePage" });
 
 const loginUserStore = useLoginUserStore();
 const loginUser = computed(() => loginUserStore.loginUser);

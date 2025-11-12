@@ -2,19 +2,19 @@ import type { RouteRecordRaw } from "vue-router";
 import { ROUTER_CONSTANTS } from "@/constants/router";
 
 // 懒加载页面组件
-const WelcomePage = () => import("@/pages/WelcomePage.vue");
-const ProfilePage = () => import("@/pages/user/ProfilePage.vue");
-const SettingsPage = () => import("@/pages/user/SettingsPage.vue");
-const AdminUserManagePage = () => import("@/pages/admin/UserManagePage.vue");
-const UserLoginPage = () => import("@/pages/user/UserLoginPage.vue");
-const UserRegisterPage = () => import("@/pages/user/UserRegisterPage.vue");
-const NotFoundPage = () => import("@/pages/NotFoundPage.vue");
+const WelcomePage = () => import("@/views/welcome/index.vue");
+const ProfilePage = () => import("@/views/user/profile/index.vue");
+const SettingsPage = () => import("@/views/user/settings/index.vue");
+const AdminUserManagePage = () => import("@/views/admin/user-manage/index.vue");
+const UserLoginPage = () => import("@/views/user/user-login/index.vue");
+const UserRegisterPage = () => import("@/views/user/user-register/index.vue");
+const NotFoundPage = () => import("@/views/exception/404/index.vue");
 
 /**
  * 路由配置数组
  *
  * 定义应用程序的路由路径、名称和对应的组件
- * BasicLayout 在 App.vue 中静态引入，所有路由都在其 router-view 中渲染
+ * Index 在 App.vue 中静态引入，所有路由都在其 router-view 中渲染
  *
  * @type {Array<RouteRecordRaw>} Vue Router 路由记录数组
  */

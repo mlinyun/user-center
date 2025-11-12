@@ -20,6 +20,8 @@
 <script setup lang="ts">
 import type { Component } from "vue";
 
+defineOptions({ name: "FeatureCard" });
+
 /**
  * 功能特性卡片组件
  */

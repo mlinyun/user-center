@@ -230,7 +230,7 @@ import {
     CameraOutlined,
     KeyOutlined,
 } from "@ant-design/icons-vue";
-import { useUserOperations } from "@/pages/admin/hooks/useUserOperations";
+import { useUserOperations } from "@/views/admin/hooks/useUserOperations";
 import { PASSWORD_PATTERN } from "@/constants/validation";
 
 const props = defineProps<{

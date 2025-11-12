@@ -26,9 +26,11 @@
 </template>
 
 <script setup lang="ts">
-import GlobalHeader from "@/components/global/GlobalHeader.vue";
-import GlobalSidebar from "@/components/global/GlobalSidebar.vue";
-import GlobalFooter from "@/components/global/GlobalFooter.vue";
+import GlobalHeader from "@components/global/header/index.vue";
+import GlobalSidebar from "@components/global/sidebar/index.vue";
+import GlobalFooter from "@components/global/footer/index.vue";
+
+defineOptions({ name: "BasicLayout" });
 </script>
 
 <style scoped>
