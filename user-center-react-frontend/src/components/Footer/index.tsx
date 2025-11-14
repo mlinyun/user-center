@@ -1,7 +1,7 @@
 import { GithubOutlined, GlobalOutlined, MailOutlined } from '@ant-design/icons';
 import { Divider, Space } from 'antd';
 import React from 'react';
-import { GITHUB_URL } from '@/constants';
+import { CONTACT_EMAIL, DOCUMENT_URL, GITHUB_URL } from '@/constants';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -17,13 +17,13 @@ const Footer: React.FC = () => {
     {
       key: 'docs',
       title: '项目文档',
-      href: GITHUB_URL + '/user-center/blob/main/README.md',
+      href: DOCUMENT_URL,
       icon: <GlobalOutlined />,
     },
     {
       key: 'email',
       title: '联系邮箱',
-      href: 'mailto:lingyun2311@gmail.com',
+      href: CONTACT_EMAIL,
       icon: <MailOutlined />,
     },
   ];

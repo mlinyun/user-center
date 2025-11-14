@@ -72,9 +72,7 @@ router.beforeEach(
 
             if (requiresAuth && !isUserLoggedIn) {
                 // 用户未登录但该路由需要认证，重定向到登录页
-                console.warn(`[权限守卫] 用户未登录，无法访问 ${to.path}，跳转到登录页`);
                 message.warning("请先登录");
-
                 next({
                     path: ROUTER_CONSTANTS.LOGIN.path,
                     query: { redirect: to.fullPath },
@@ -94,12 +92,8 @@ router.beforeEach(
                 const userRole = loginUser.userRole;
 
                 if (userRole !== "admin") {
-                    // 用户不是管理员
-                    console.warn(
-                        `[权限守卫] 用户 ${loginUser.userName} (角色: ${userRole}) 无法访问需要管理员权限的路由 ${to.path}`
-                    );
+                    // 用户不是管理员，拒绝访问该路由
                     message.error("您没有权限访问该页面");
-
                     next({ path: ROUTER_CONSTANTS.WELCOME.path });
                     return;
                 }
@@ -111,7 +105,6 @@ router.beforeEach(
             // 如果用户已登录但尝试访问登录页，重定向到首页
 
             if (isUserLoggedIn && to.path === ROUTER_CONSTANTS.LOGIN.path) {
-                console.info("[权限守卫] 已登录用户不能访问登录页，重定向到首页");
                 next({ path: ROUTER_CONSTANTS.WELCOME.path });
                 return;
             }
@@ -122,9 +115,8 @@ router.beforeEach(
             // 所有权限检查都通过，允许导航
 
             next();
-        } catch (error) {
+        } catch {
             // 守卫执行过程中出现异常，为了安全起见重定向到登录页
-            console.error("[权限守卫] 执行异常:", error);
             next({ path: ROUTER_CONSTANTS.LOGIN.path });
         }
     }
@@ -135,13 +127,10 @@ router.beforeEach(
  *
  * 用于页面标题更新和用户行为日志记录
  */
-router.afterEach((to: RouteLocationNormalized, from: RouteLocationNormalized): void => {
+router.afterEach((to: RouteLocationNormalized): void => {
     // 更新浏览器标签页标题
-    const title = to.meta?.title || "用户中心";
-    document.title = `${title} - 用户中心`;
-
-    // 记录导航日志用于分析用户行为（可用于分析和调试）
-    console.log(`[路由导航] ${from.path} → ${to.path} (${to.meta?.title})`);
+    const title = to.meta?.title || "凌云用户中心";
+    document.title = `${title} - 凌云用户中心`;
 });
 
 export default router;

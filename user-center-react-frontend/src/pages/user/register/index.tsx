@@ -71,7 +71,7 @@ const Register: React.FC = () => {
     <div className={styles.container}>
       <Helmet>
         <title>
-          {'注册'}- {Settings.title}
+          {'注册'} - {Settings.title}
         </title>
       </Helmet>
       <div

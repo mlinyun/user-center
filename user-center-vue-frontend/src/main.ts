@@ -34,8 +34,6 @@ app.use(pinia);
  */
 async function initializeApp(): Promise<void> {
     try {
-        console.info("[应用初始化] 开始恢复用户会话...");
-
         // 获取 Store 实例
         const loginUserStore = useLoginUserStore();
 

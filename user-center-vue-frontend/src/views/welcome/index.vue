@@ -33,16 +33,16 @@
                                 class="btn-primary"
                             >
                                 <GithubOutlined class="btn-icon" />
-                                后端代码仓库
+                                项目代码仓库
                             </a>
                             <a
-                                :href="GITHUB_URL + '-web'"
+                                :href="DOCUMENT_URL"
                                 target="_blank"
                                 rel="noreferrer"
                                 class="btn-secondary"
                             >
-                                <GithubOutlined class="btn-icon" />
-                                前端代码仓库
+                                <GlobalOutlined class="btn-icon" />
+                                项目文档地址
                             </a>
                         </div>
                     </div>
@@ -125,6 +125,7 @@
 import { computed } from "vue";
 import {
     GithubOutlined,
+    GlobalOutlined,
     SafetyOutlined,
     TeamOutlined,
     CodeOutlined,
@@ -132,7 +133,7 @@ import {
     BookOutlined,
 } from "@ant-design/icons-vue";
 import useLoginUserStore from "@/stores/modules/useLoginUserStore.ts";
-import { GITHUB_URL } from "@/constants/system.ts";
+import { DOCUMENT_URL, GITHUB_URL } from "@/constants/system.ts";
 import FeatureCard from "@components/welcome/feature-card/index.vue";
 import TechStack from "@components/welcome/tech-stack-card/index.vue";
 

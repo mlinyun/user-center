@@ -43,7 +43,7 @@
 <script setup lang="ts">
 import { GithubOutlined, GlobalOutlined, MailOutlined } from "@ant-design/icons-vue";
 import { getCurrentYear } from "@utils/date.ts";
-import { GITHUB_URL } from "@/constants/system.ts";
+import { DOCUMENT_URL, GITHUB_URL } from "@/constants/system.ts";
 
 defineOptions({ name: "GlobalFooter" });
 
@@ -61,7 +61,7 @@ const footerLinks = [
     {
         key: "docs",
         title: "项目文档",
-        href: GITHUB_URL + "/blob/main/README.md",
+        href: DOCUMENT_URL,
         icon: GlobalOutlined,
     },
     {

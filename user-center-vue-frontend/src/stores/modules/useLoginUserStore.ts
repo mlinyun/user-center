@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { getLoginUserInfo, userLogin, userLogout } from "@/api/user.ts";
+import { message } from "ant-design-vue";
 
 /**
  * 登录用户状态管理 Store
@@ -41,8 +42,8 @@ const useLoginUserStore = defineStore("loginUser", () => {
                 userName: "未登录",
             };
             return false;
-        } catch (error) {
-            console.error("获取登录用户信息失败:", error);
+        } catch {
+            message.error("用户未登录或会话已过期，请重新登录");
             // 获取失败时设置为未登录状态
             loginUser.value = {
                 userName: "未登录",
@@ -72,8 +73,8 @@ const useLoginUserStore = defineStore("loginUser", () => {
             }
 
             return false;
-        } catch (error) {
-            console.error("登录失败:", error);
+        } catch {
+            message.error("登录失败，请检查账号和密码是否正确");
             return false;
         }
     }
@@ -101,8 +102,8 @@ const useLoginUserStore = defineStore("loginUser", () => {
             }
 
             return false;
-        } catch (error) {
-            console.error("登出失败:", error);
+        } catch {
+            message.error("登出失败，请稍后重试");
             return false;
         }
     }

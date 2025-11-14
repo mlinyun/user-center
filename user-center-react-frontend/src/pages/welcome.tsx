@@ -1,10 +1,11 @@
-import { GITHUB_URL } from '@/constants';
+import { DOCUMENT_URL, GITHUB_URL } from '@/constants';
 import { PageContainer } from '@ant-design/pro-components';
 import { useModel } from '@umijs/max';
 import {
   BookOutlined,
   CodeOutlined,
   GithubOutlined,
+  GlobalOutlined,
   RocketOutlined,
   SafetyOutlined,
   TeamOutlined,
@@ -293,10 +294,10 @@ const Welcome: React.FC = () => {
                   }}
                 >
                   <GithubOutlined style={{ marginRight: '8px', fontSize: '16px' }} />
-                  后端代码仓库
+                  项目代码仓库
                 </a>
                 <a
-                  href={GITHUB_URL + '/user-center-web'}
+                  href={DOCUMENT_URL}
                   target="_blank"
                   rel="noreferrer"
                   style={{
@@ -323,8 +324,8 @@ const Welcome: React.FC = () => {
                     e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
-                  <GithubOutlined style={{ marginRight: '8px', fontSize: '16px' }} />
-                  前端代码仓库
+                  <GlobalOutlined style={{ marginRight: '8px', fontSize: '16px' }} />
+                  项目文档地址
                 </a>
               </div>
             </div>

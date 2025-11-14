@@ -68,7 +68,7 @@ const Login: React.FC = () => {
     <div className={styles.container}>
       <Helmet>
         <title>
-          {'登录'}- {Settings.title}
+          {'登录'} - {Settings.title}
         </title>
       </Helmet>
       <div
