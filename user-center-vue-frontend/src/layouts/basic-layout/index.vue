@@ -1,7 +1,7 @@
 <template>
     <a-layout
-        class="basic-layout"
         :style="{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }"
+        class="basic-layout"
     >
         <!-- 顶部导航栏 -->
         <GlobalHeader />
@@ -25,7 +25,7 @@
     </a-layout>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import GlobalHeader from "@components/global/header/index.vue";
 import GlobalSidebar from "@components/global/sidebar/index.vue";
 import GlobalFooter from "@components/global/footer/index.vue";

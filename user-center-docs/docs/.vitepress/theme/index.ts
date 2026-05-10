@@ -1,7 +1,7 @@
 import BaseTheme from "vitepress/theme";
-import type { Theme } from "vitepress";
+import type {Theme} from "vitepress";
 import "./style/vars.css";
 
 export default {
-  extends: BaseTheme,
+    extends: BaseTheme,
 } satisfies Theme;

@@ -3,13 +3,7 @@ import { ActionType, PageContainer, ProTable } from '@ant-design/pro-components'
 import { PlusOutlined, TeamOutlined } from '@ant-design/icons';
 import { Button, Space } from 'antd';
 import React, { useRef, useState } from 'react';
-import {
-  CreateUserModal,
-  EditUserModal,
-  ResetPasswordModal,
-  getUserTableColumns,
-  ViewUserDrawer,
-} from './components';
+import { CreateUserModal, EditUserModal, getUserTableColumns, ResetPasswordModal, ViewUserDrawer, } from './components';
 import { useUserOperations } from './hooks/useUserOperations';
 
 /**

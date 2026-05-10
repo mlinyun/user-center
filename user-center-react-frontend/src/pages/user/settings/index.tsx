@@ -1,6 +1,5 @@
-import { currentUser } from '@/services/ant-design-pro/user';
+import { currentUser, updateUserInfo, updateUserPassword } from '@/services/ant-design-pro/user';
 import { uploadAvatar } from '@/services/ant-design-pro/file';
-import { updateUserInfo, updateUserPassword } from '@/services/ant-design-pro/user';
 import {
   CheckCircleOutlined,
   LockOutlined,

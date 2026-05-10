@@ -3,7 +3,7 @@
         <a-spin :spinning="loading">
             <a-row :gutter="[24, 24]">
                 <!-- 用户头像 -->
-                <a-col :xs="24" :md="12">
+                <a-col :md="12" :xs="24">
                     <a-card :bordered="true" class="card">
                         <template #title>
                             <a-space>
@@ -22,23 +22,23 @@
                                 <a-typography-title :level="4" class="avatar-name">
                                     {{ loginUser.userName || "未设置昵称" }}
                                 </a-typography-title>
-                                <a-typography-text type="secondary" class="avatar-account">
+                                <a-typography-text class="avatar-account" type="secondary">
                                     @{{ loginUser.userAccount || "" }}
                                 </a-typography-text>
                             </div>
 
                             <a-upload
-                                accept="image/*"
-                                :show-upload-list="false"
                                 :before-upload="handleAvatarUpload"
                                 :disabled="uploading"
+                                :show-upload-list="false"
+                                accept="image/*"
                             >
                                 <a class="avatar-upload-btn">
                                     {{ uploading ? "上传中..." : "更换头像" }}
                                 </a>
                             </a-upload>
 
-                            <a-typography-text type="secondary" class="avatar-tip">
+                            <a-typography-text class="avatar-tip" type="secondary">
                                 支持 JPG、JPEG、PNG、GIF 格式<br />大小不超过 2MB
                             </a-typography-text>
                         </div>
@@ -46,7 +46,7 @@
                 </a-col>
 
                 <!-- 基本信息 -->
-                <a-col :xs="24" :md="12">
+                <a-col :md="12" :xs="24">
                     <a-card :bordered="true" class="card">
                         <template #title>
                             <a-space>
@@ -56,11 +56,11 @@
                         </template>
                         <a-form
                             ref="basicFormRef"
-                            layout="horizontal"
                             :label-col="{ span: 6 }"
-                            :wrapper-col="{ span: 18 }"
                             :model="basicForm"
                             :rules="basicRules"
+                            :wrapper-col="{ span: 18 }"
+                            layout="horizontal"
                             @finish="handleBasicFinish"
                         >
                             <a-form-item label="用户昵称" name="userName">
@@ -102,9 +102,9 @@
 
                             <div class="form-submit">
                                 <a-button
-                                    type="primary"
-                                    html-type="submit"
                                     :loading="basicSubmitting"
+                                    html-type="submit"
+                                    type="primary"
                                 >
                                     保存修改
                                 </a-button>
@@ -114,7 +114,7 @@
                 </a-col>
 
                 <!-- 账号安全 -->
-                <a-col :xs="24" :md="12">
+                <a-col :md="12" :xs="24">
                     <a-card :bordered="true" class="card">
                         <template #title>
                             <a-space>
@@ -128,15 +128,15 @@
                                 >安全等级</a-typography-title
                             >
                             <a-progress
-                                type="circle"
                                 :percent="securityInfo.score"
-                                :stroke-color="securityInfo.color"
                                 :size="100"
+                                :stroke-color="securityInfo.color"
+                                type="circle"
                             >
                                 <template #format>
                                     <div
-                                        class="progress-content"
                                         :style="{ color: securityInfo.color }"
+                                        class="progress-content"
                                     >
                                         <div class="progress-score">{{ securityInfo.score }}</div>
                                         <div class="progress-level">
@@ -150,7 +150,7 @@
                         <a-divider />
 
                         <div class="security-tips">
-                            <a-typography-text strong class="security-tip-title">
+                            <a-typography-text class="security-tip-title" strong>
                                 <a-space>
                                     <CheckCircleOutlined
                                         v-if="securityInfo.score >= 80"
@@ -172,10 +172,10 @@
                         <a-divider />
 
                         <div class="security-status">
-                            <a-typography-text type="secondary" class="status-label">
+                            <a-typography-text class="status-label" type="secondary">
                                 账号状态
                             </a-typography-text>
-                            <a-space direction="vertical" :size="8" style="width: 100%">
+                            <a-space :size="8" direction="vertical" style="width: 100%">
                                 <div
                                     v-for="item in accountStatus"
                                     :key="item.label"
@@ -192,7 +192,7 @@
                 </a-col>
 
                 <!-- 密码管理 -->
-                <a-col :xs="24" :md="12">
+                <a-col :md="12" :xs="24">
                     <a-card :bordered="true" class="card">
                         <template #title>
                             <a-space>
@@ -202,20 +202,20 @@
                         </template>
 
                         <div class="password-alert">
-                            <a-space direction="vertical" :size="4" style="width: 100%">
+                            <a-space :size="4" direction="vertical" style="width: 100%">
                                 <a-typography-text
                                     strong
                                     style="font-size: 13px; color: var(--ant-color-info)"
                                 >
                                     <SafetyOutlined /> 密码安全建议
                                 </a-typography-text>
-                                <a-typography-text type="secondary" class="password-tip">
+                                <a-typography-text class="password-tip" type="secondary">
                                     • 密码长度 8-20 位，建议包含大小写字母、数字和特殊字符
                                 </a-typography-text>
-                                <a-typography-text type="secondary" class="password-tip">
+                                <a-typography-text class="password-tip" type="secondary">
                                     • 不要使用生日、电话号码等容易被猜到的信息
                                 </a-typography-text>
-                                <a-typography-text type="secondary" class="password-tip">
+                                <a-typography-text class="password-tip" type="secondary">
                                     • 定期更换密码，不要在多个网站使用相同密码
                                 </a-typography-text>
                             </a-space>
@@ -225,11 +225,11 @@
 
                         <a-form
                             ref="passwordFormRef"
-                            layout="horizontal"
                             :label-col="{ span: 6 }"
-                            :wrapper-col="{ span: 18 }"
                             :model="passwordForm"
                             :rules="passwordRules"
+                            :wrapper-col="{ span: 18 }"
+                            layout="horizontal"
                             @finish="handlePasswordFinish"
                         >
                             <a-form-item label="当前密码" name="rawPassword">
@@ -255,9 +255,9 @@
 
                             <div class="form-submit">
                                 <a-button
-                                    type="primary"
-                                    html-type="submit"
                                     :loading="passwordSubmitting"
+                                    html-type="submit"
+                                    type="primary"
                                 >
                                     修改密码
                                 </a-button>
@@ -270,16 +270,16 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed, onMounted, reactive, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import type { FormInstance, UploadProps } from "ant-design-vue";
 import { message } from "ant-design-vue";
 import {
-    UserOutlined,
-    SafetyOutlined,
-    LockOutlined,
     CheckCircleOutlined,
+    LockOutlined,
+    SafetyOutlined,
+    UserOutlined,
     WarningOutlined,
 } from "@ant-design/icons-vue";
 import type { Rule } from "ant-design-vue/es/form";

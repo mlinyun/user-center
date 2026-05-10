@@ -54,7 +54,7 @@
 * **后端**：负责业务逻辑处理和数据存储，确保系统安全稳定
 * **数据库**：存储用户信息和系统数据
 
-![凌云用户中心系统架构图](https://notebook.mlinyun.com/user-center/system_architecture.svg)
+![凌云用户中心系统架构图](https://static.mlinyun.com/user-center/system_architecture.svg)
 
 ### 后端技术栈
 

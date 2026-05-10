@@ -2,9 +2,9 @@
     <a-drawer
         :open="visible"
         :width="520"
-        title="用户详情"
-        placement="right"
         destroy-on-close
+        placement="right"
+        title="用户详情"
         @close="handleClose"
     >
         <div v-if="user" class="drawer-content">
@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <a-descriptions bordered :column="1" size="middle" class="info-descriptions">
+            <a-descriptions :column="1" bordered class="info-descriptions" size="middle">
                 <a-descriptions-item label="用户编号">
                     <a-typography-text copyable>{{ user.id }}</a-typography-text>
                 </a-descriptions-item>
@@ -63,11 +63,11 @@
     </a-drawer>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import dayjs from "dayjs";
 import { computed } from "vue";
 import { USER_ROLE, USER_STATUS } from "@/constants/system";
-import { TeamOutlined, SafetyOutlined, UserOutlined } from "@ant-design/icons-vue";
+import { SafetyOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons-vue";
 
 const props = defineProps<{
     visible: boolean;

@@ -10,21 +10,20 @@ package com.mlinyun.usercenter.constant;
 public final class SortOrderConstant {
 
     /**
+     * 升序
+     */
+    public static final String ASC = "ascend";
+    /**
+     * 降序
+     */
+    public static final String DESC = "descend";
+
+    /**
      * 私有构造函数，防止实例化
      */
     private SortOrderConstant() {
         // 私有化构造函数，防止实例化
         throw new IllegalStateException("Utility class");
     }
-
-    /**
-     * 升序
-     */
-    public static final String ASC = "ascend";
-
-    /**
-     * 降序
-     */
-    public static final String DESC = "descend";
 
 }

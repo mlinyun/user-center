@@ -1,7 +1,7 @@
-﻿import { history } from '@@/core/history';
-import type { RequestOptions } from '@@/plugin-request/request';
-import type { RequestConfig } from '@umijs/max';
-import { message, notification } from 'antd';
+﻿import {history} from '@@/core/history';
+import type {RequestOptions} from '@@/plugin-request/request';
+import type {RequestConfig} from '@umijs/max';
+import {message, notification} from 'antd';
 
 /**
  * 业务状态码枚举

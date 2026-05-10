@@ -1,7 +1,12 @@
 package com.mlinyun.usercenter.service.user;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.mlinyun.usercenter.constant.UserConstant;
 import com.mlinyun.usercenter.exception.BusinessException;
@@ -22,18 +27,15 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @DisplayName("用户登出服务测试")
 class UserLogoutTest {
 
+    // 模拟的用户 ID
+    private static final Long USER_ID = 1899878538809757698L;
     @Spy
     @InjectMocks
     private UserServiceImpl userService;
-
     @Mock
     private HttpServletRequest mockRequest;
-
     @Mock
     private HttpSession mockSession;
-
-    // 模拟的用户 ID
-    private static final Long USER_ID = 1899878538809757698L;
 
     @Test
     @DisplayName("测试用户正常登出")

@@ -7,7 +7,7 @@
             <div class="bg-decoration-circle" />
 
             <a-row :gutter="[48, 32]" align="middle">
-                <a-col :xs="24" :lg="14">
+                <a-col :lg="14" :xs="24">
                     <div class="banner-content">
                         <!-- 用户问候 -->
                         <div class="greeting-section">
@@ -28,18 +28,18 @@
                         <div class="action-buttons">
                             <a
                                 :href="GITHUB_URL"
-                                target="_blank"
-                                rel="noreferrer"
                                 class="btn-primary"
+                                rel="noreferrer"
+                                target="_blank"
                             >
                                 <GithubOutlined class="btn-icon" />
                                 项目代码仓库
                             </a>
                             <a
                                 :href="DOCUMENT_URL"
-                                target="_blank"
-                                rel="noreferrer"
                                 class="btn-secondary"
+                                rel="noreferrer"
+                                target="_blank"
                             >
                                 <GlobalOutlined class="btn-icon" />
                                 项目文档地址
@@ -48,7 +48,7 @@
                     </div>
                 </a-col>
 
-                <a-col :xs="24" :lg="10">
+                <a-col :lg="10" :xs="24">
                     <!-- 用户信息卡片 -->
                     <a-card :bordered="true" class="user-info-card">
                         <div class="user-info-header">
@@ -86,7 +86,7 @@
                         </div>
 
                         <div class="user-info-footer">
-                            <a-typography-text type="secondary" class="create-time">
+                            <a-typography-text class="create-time" type="secondary">
                                 账号创建时间：{{ formatCreateTime(loginUser.createTime) }}
                             </a-typography-text>
                         </div>
@@ -101,7 +101,7 @@
                 <h3 class="section-title">✨ 核心功能特性</h3>
             </template>
             <a-row :gutter="[24, 24]">
-                <a-col v-for="feature in features" :key="feature.title" :xs="24" :sm="12" :lg="8">
+                <a-col v-for="feature in features" :key="feature.title" :lg="8" :sm="12" :xs="24">
                     <FeatureCard v-bind="feature" />
                 </a-col>
             </a-row>
@@ -113,7 +113,7 @@
                 <h3 class="section-title">🔧 技术栈</h3>
             </template>
             <a-row :gutter="[24, 24]">
-                <a-col v-for="stack in techStacks" :key="stack.title" :xs="24" :lg="8">
+                <a-col v-for="stack in techStacks" :key="stack.title" :lg="8" :xs="24">
                     <TechStack v-bind="stack" />
                 </a-col>
             </a-row>
@@ -121,16 +121,16 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed } from "vue";
 import {
+    BookOutlined,
+    CodeOutlined,
     GithubOutlined,
     GlobalOutlined,
+    RocketOutlined,
     SafetyOutlined,
     TeamOutlined,
-    CodeOutlined,
-    RocketOutlined,
-    BookOutlined,
 } from "@ant-design/icons-vue";
 import useLoginUserStore from "@/stores/modules/useLoginUserStore.ts";
 import { DOCUMENT_URL, GITHUB_URL } from "@/constants/system.ts";

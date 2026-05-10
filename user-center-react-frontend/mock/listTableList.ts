@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
+import {Request, Response} from 'express';
 import moment from 'moment';
-import { parse } from 'url';
+import {parse} from 'url';
 
 // mock tableListDataSource
 const genList = (current: number, pageSize: number) => {

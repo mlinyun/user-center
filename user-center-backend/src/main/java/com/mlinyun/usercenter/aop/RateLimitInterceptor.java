@@ -38,37 +38,14 @@ public class RateLimitInterceptor {
     private static final long MILLIS_PER_SECOND = 1000L;
 
     /**
+     * 限流计数器：key = limitKey, value = [count, expireTime] 使用内存存储，生产环境建议使用 Redis
+     */
+    private final Map<String, RateLimitInfo> rateLimitMap = new ConcurrentHashMap<>();
+    /**
      * 用户服务
      */
     @Resource
     private UserService userService;
-
-    /**
-     * 限流计数器：key = limitKey, value = [count, expireTime] 使用内存存储，生产环境建议使用 Redis
-     */
-    private final Map<String, RateLimitInfo> rateLimitMap = new ConcurrentHashMap<>();
-
-    /**
-     * 限流信息类
-     */
-    private static class RateLimitInfo {
-
-        /**
-         * 请求计数
-         */
-        AtomicInteger count;
-
-        /**
-         * 过期时间戳（毫秒）
-         */
-        long expireTime;
-
-        RateLimitInfo(int initialCount, long expireTime) {
-            this.count = new AtomicInteger(initialCount);
-            this.expireTime = expireTime;
-        }
-
-    }
 
     /**
      * 环绕通知，处理带有 @RateLimit 注解的方法
@@ -185,6 +162,28 @@ public class RateLimitInterceptor {
         }
 
         return request.getRemoteAddr();
+    }
+
+    /**
+     * 限流信息类
+     */
+    private static class RateLimitInfo {
+
+        /**
+         * 请求计数
+         */
+        AtomicInteger count;
+
+        /**
+         * 过期时间戳（毫秒）
+         */
+        long expireTime;
+
+        RateLimitInfo(int initialCount, long expireTime) {
+            this.count = new AtomicInteger(initialCount);
+            this.expireTime = expireTime;
+        }
+
     }
 
 }

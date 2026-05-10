@@ -14,8 +14,8 @@
 import {
     createRouter,
     createWebHistory,
-    type RouteLocationNormalized,
     type NavigationGuardNext,
+    type RouteLocationNormalized,
 } from "vue-router";
 import { routes } from "@/router/routes";
 import { ROUTER_CONSTANTS } from "@/constants/router";

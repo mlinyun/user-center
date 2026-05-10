@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://notebook.mlinyun.com/user-center/logo.svg" alt="凌云用户中心系统" width="100" height="100">
+<img src="https://static.mlinyun.com/user-center/logo.svg" alt="凌云用户中心系统" width="100" height="100">
 
 # 凌云用户中心系统
 
@@ -17,11 +17,10 @@
 
 </div>
 
----
-
 ## 📖 项目简介
 
-凌云用户中心是一个企业级的用户管理系统，就像您在使用各种网站和 APP 时看到的登录、注册、个人资料管理功能一样。这个系统可以帮助个人开发者或团队快速搭建一套完整的用户管理解决方案。
+凌云用户中心是一个企业级的用户管理系统，就像您在使用各种网站和 APP
+时看到的登录、注册、个人资料管理功能一样。这个系统可以帮助个人开发者或团队快速搭建一套完整的用户管理解决方案。
 
 > 本项目是我在学习 [鱼皮的编程导航](https://www.codefather.cn/)
 > 用户中心系统课程后的实践成果。通过这个项目，我系统地掌握了从需求分析、技术选型到开发部署的完整流程。如果你也想通过实战项目提升编程能力，和其他编程爱好者一起交流进步，非常推荐加入：
@@ -34,8 +33,6 @@
 - **生产级代码规范**：遵循企业级开发标准，包含完整的代码规范、API 文档和单元测试
 - **技术栈主流且实用**：使用 Spring Boot 3、React 18、Vue 3 等最新稳定版本
 - **专注核心能力**：功能设计精简聚焦，让你把精力放在**学习技术和积累经验**上，而非复杂的业务逻辑
-
----
 
 ## ✨ 功能介绍
 
@@ -62,14 +59,12 @@
 | ✅ **解除封禁**     | 解除对用户的封禁，恢复正常使用          |
 | 🎭 **权限控制**    | 精细化的权限管理，确保只有授权人员能访问敏感功能 |
 
----
-
 ## 🎨 界面预览
 
 ### 在线体验
 
-- **React 版本**：https://react.uc.mlinyun.com
-- **Vue 版本**：https://vue.uc.mlinyun.com
+- **React 版本**：<https://react.uc.mlinyun.com>
+- **Vue 版本**：<https://vue.uc.mlinyun.com>
 
 > 💡 体验提示：使用管理员账号（账号：`Admin01` 密码：`Admin..1024`）登录可体验完整的管理功能
 >
@@ -78,43 +73,43 @@
 
 简洁的注册界面，只需填写必要信息即可快速创建账号。
 
-![注册页面](https://notebook.mlinyun.com/user-center/register.png)
+![注册页面](https://static.mlinyun.com/user-center/register.png)
 
 ### 登录页面
 
 通过账号 + 密码的方式进行登录
 
-![登录页面](https://notebook.mlinyun.com/user-center/login.png)
+![登录页面](https://static.mlinyun.com/user-center/login.png)
 
 ### 欢迎页面
 
 登录后的首页，展示用户信息、项目核心功能特性和使用的技术栈
 
-![欢迎页面](https://notebook.mlinyun.com/user-center/welcome.png)
+![欢迎页面](https://static.mlinyun.com/user-center/welcome.png)
 
 ### 个人资料页面
 
 该页面可以查看用户个人的详细信息
 
-![个人资料页面](https://notebook.mlinyun.com/user-center/profile.png)
+![个人资料页面](https://static.mlinyun.com/user-center/profile.png)
 
 ### 账号设置页面
 
 用于修改个人基本信息、修改密码等账号安全设置
 
-![账号设置页面](https://notebook.mlinyun.com/user-center/settings.png)
+![账号设置页面](https://static.mlinyun.com/user-center/settings.png)
 
 ### 用户管理页面
 
 管理员专用，可以管理所有用户
 
-![用户管理页面](https://notebook.mlinyun.com/user-center/user-manage.png)
+![用户管理页面](https://static.mlinyun.com/user-center/user-manage.png)
 
 ## 🏗️ 技术架构
 
 ### 系统架构图
 
-<img src="https://notebook.mlinyun.com/user-center/system_architecture.svg" alt="凌云用户中心系统架构图">
+<img src="https://static.mlinyun.com/user-center/system_architecture.svg" alt="凌云用户中心系统架构图">
 
 ### 后端技术栈
 
@@ -162,8 +157,6 @@
 - 🚀 **现代化构建**：React 使用 Umi，Vue 使用 Vite，开发体验极佳
 - 📦 **状态管理**：React 使用 Umi Model，Vue 使用 Pinia
 
----
-
 ## 🔐 安全特性
 
 ### 密码安全
@@ -183,8 +176,6 @@
 - 登录后自动维持登录状态，无需频繁输入密码
 - 支持"记住我"功能，提升使用便利性
 - 安全退出机制，及时清理会话信息
-
----
 
 ## 🚀 快速开始
 
@@ -254,10 +245,8 @@ pnpm dev
 
 - **前端页面**：根据启动的版本访问对应端口
 - **API 文档**：
-    - Swagger UI: `http://localhost:8100/api/swagger-ui.html`
-    - Knife4j: `http://localhost:8100/api/doc.html` (用户名/密码: admin/admin123)
-
----
+  - Swagger UI: `http://localhost:8100/api/swagger-ui.html`
+  - Knife4j: `http://localhost:8100/api/doc.html` (用户名/密码: admin/admin123)
 
 ## 🔧 核心功能实现
 
@@ -308,8 +297,6 @@ String encryptPassword = BCrypt.hashpw(userPassword, BCrypt.gensalt());
   "data": {}
 }
 ```
-
----
 
 ## 🌐 生产部署
 
@@ -367,13 +354,11 @@ server {
 }
 ```
 
----
-
 ## 📚 开发文档
 
 ### 在线文档
 
-- 项目文档地址：https://docs.uc.mlinyun.com
+- 项目文档地址：<https://docs.uc.mlinyun.com>
 
 ### API 文档
 
@@ -397,8 +382,6 @@ server {
   pnpm lint  # 检查代码规范
   ```
 
----
-
 ## 🎓 适用人群
 
 ### 学习者
@@ -417,8 +400,6 @@ server {
 
 本项目采用 MIT 许可证。详见 [LICENSE](LICENSE) 文件。
 
----
-
 ## 💬 联系方式
 
 如有问题或建议，欢迎通过以下方式联系：
@@ -426,11 +407,7 @@ server {
 - 提交 Issue
 - 发送邮件至：<lingyun2311@gmail.com>
 
----
-
-
 <div align="center">
 🙏 如果这个项目对你有帮助，欢迎点亮 ⭐️ Star、转发分享、或参与共建。
-
 Made with ❤️ by <a href="https://github.com/mlinyun">mlinyun</a>
 </div>

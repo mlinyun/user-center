@@ -9,5 +9,5 @@ export default {
     rules: {
         // Add overrides and additional rules here
     },
-    ignoresFiles: ["**/dist/**", "**/node_modules/**", "**/*.js", "**/*.ts"],
-}
+    ignoreFiles: ["**/dist/**", "**/node_modules/**", "**/*.js", "**/*.ts"],
+};

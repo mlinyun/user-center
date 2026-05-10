@@ -1,12 +1,12 @@
 <template>
     <a-modal
+        :confirm-loading="submitting"
+        :mask-closable="false"
+        :ok-button-props="{ disabled: !user, loading: submitting || uploading }"
         :open="visible"
+        destroy-on-close
         title="编辑用户信息"
         width="720px"
-        :confirm-loading="submitting"
-        :ok-button-props="{ disabled: !user, loading: submitting || uploading }"
-        :mask-closable="false"
-        destroy-on-close
         @cancel="handleCancel"
         @ok="handleSubmit"
     >
@@ -29,10 +29,10 @@
             </a-divider>
             <div class="avatar-wrapper">
                 <a-upload
-                    :show-upload-list="false"
-                    accept="image/*"
                     :before-upload="beforeAvatarUpload"
                     :disabled="uploading || !user"
+                    :show-upload-list="false"
+                    accept="image/*"
                 >
                     <div class="avatar-upload">
                         <a-spin :spinning="uploading">
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </a-upload>
-                <a-typography-text type="secondary" class="avatar-tip">
+                <a-typography-text class="avatar-tip" type="secondary">
                     上传后会立即保存，刷新后生效
                 </a-typography-text>
             </div>
@@ -56,12 +56,12 @@
 
         <a-form
             ref="formRef"
+            :label-col="labelCol"
             :model="formModel"
             :rules="rules"
-            layout="horizontal"
-            :label-col="labelCol"
             :wrapper-col="wrapperCol"
             autocomplete="off"
+            layout="horizontal"
         >
             <div class="section">
                 <a-divider orientation="left">
@@ -73,9 +73,9 @@
                 <a-form-item label="用户昵称" name="userName">
                     <a-input
                         v-model:value="formModel.userName"
-                        placeholder="请输入用户昵称"
                         allow-clear
                         class="rounded-input"
+                        placeholder="请输入用户昵称"
                     >
                         <template #prefix>
                             <UserOutlined />
@@ -98,10 +98,10 @@
                 <a-form-item label="个人简介" name="userProfile">
                     <a-textarea
                         v-model:value="formModel.userProfile"
-                        :rows="3"
                         :maxlength="200"
-                        show-count
+                        :rows="3"
                         placeholder="请输入个人简介"
+                        show-count
                     />
                 </a-form-item>
             </div>
@@ -116,9 +116,9 @@
                 <a-form-item label="手机号码" name="userPhone">
                     <a-input
                         v-model:value="formModel.userPhone"
-                        placeholder="请输入手机号码"
                         allow-clear
                         class="rounded-input"
+                        placeholder="请输入手机号码"
                     >
                         <template #prefix>
                             <PhoneOutlined />
@@ -128,9 +128,9 @@
                 <a-form-item label="邮箱地址" name="userEmail">
                     <a-input
                         v-model:value="formModel.userEmail"
-                        placeholder="请输入邮箱地址"
                         allow-clear
                         class="rounded-input"
+                        placeholder="请输入邮箱地址"
                     >
                         <template #prefix>
                             <MailOutlined />
@@ -142,20 +142,20 @@
     </a-modal>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import dayjs from "dayjs";
 import { computed, reactive, ref, watch } from "vue";
 import type { FormInstance, UploadProps } from "ant-design-vue";
 import type { Rule } from "ant-design-vue/es/form";
 import {
+    CameraOutlined,
     EditOutlined,
     IdcardOutlined,
-    UserOutlined,
-    TeamOutlined,
-    SafetyOutlined,
-    PhoneOutlined,
     MailOutlined,
-    CameraOutlined,
+    PhoneOutlined,
+    SafetyOutlined,
+    TeamOutlined,
+    UserOutlined,
 } from "@ant-design/icons-vue";
 import { USER_ROLE } from "@/constants/system";
 import { useUserOperations } from "@/views/admin/hooks/useUserOperations";

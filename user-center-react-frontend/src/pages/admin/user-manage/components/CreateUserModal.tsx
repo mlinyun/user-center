@@ -1,20 +1,20 @@
 import { ModalForm, ProFormRadio, ProFormText, ProFormTextArea } from '@ant-design/pro-components';
 import {
-  PlusOutlined,
-  UserOutlined,
-  LockOutlined,
-  SafetyOutlined,
-  IdcardOutlined,
-  ManOutlined,
-  WomanOutlined,
-  PhoneOutlined,
-  MailOutlined,
-  TeamOutlined,
   CameraOutlined,
+  IdcardOutlined,
   InfoCircleOutlined,
   KeyOutlined,
+  LockOutlined,
+  MailOutlined,
+  ManOutlined,
+  PhoneOutlined,
+  PlusOutlined,
+  SafetyOutlined,
+  TeamOutlined,
+  UserOutlined,
+  WomanOutlined,
 } from '@ant-design/icons';
-import { Space, Typography, Divider, Avatar, Upload, Spin, Tag, Alert } from 'antd';
+import { Alert, Avatar, Divider, Space, Spin, Tag, Typography, Upload } from 'antd';
 import React, { useState } from 'react';
 import { useUserOperations } from '../hooks/useUserOperations';
 

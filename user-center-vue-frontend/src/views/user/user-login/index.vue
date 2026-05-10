@@ -3,26 +3,26 @@
         <div class="login-container">
             <div class="login-header">
                 <div class="logo-title">
-                    <img class="logo" :src="SYSTEM_LOGO" alt="logo" />
+                    <img :src="SYSTEM_LOGO" alt="logo" class="logo" />
                     <h1 class="title">{{ SYSTEM_TITLE }}</h1>
                 </div>
                 <p class="subtitle">{{ SYSTEM_SUBTITLE }}</p>
             </div>
 
-            <a-card class="login-card" :bordered="false">
+            <a-card :bordered="false" class="login-card">
                 <a-tabs v-model:activeKey="activeKey" centered>
                     <a-tab-pane key="account" tab="账号密码登录">
                         <a-form
                             :model="loginForm"
                             :rules="loginRules"
-                            @finish="handleLogin"
                             layout="vertical"
+                            @finish="handleLogin"
                         >
                             <a-form-item name="userAccount">
                                 <a-input
                                     v-model:value="loginForm.userAccount"
-                                    size="large"
                                     placeholder="请输入登录账号"
+                                    size="large"
                                 >
                                     <template #prefix>
                                         <UserOutlined />
@@ -33,8 +33,8 @@
                             <a-form-item name="userPassword">
                                 <a-input-password
                                     v-model:value="loginForm.userPassword"
-                                    size="large"
                                     placeholder="请输入登录密码"
+                                    size="large"
                                 >
                                     <template #prefix>
                                         <LockOutlined />
@@ -57,11 +57,11 @@
 
                             <a-form-item>
                                 <a-button
-                                    type="primary"
-                                    html-type="submit"
-                                    size="large"
                                     :loading="loading"
                                     block
+                                    html-type="submit"
+                                    size="large"
+                                    type="primary"
                                 >
                                     登录
                                 </a-button>
@@ -78,16 +78,16 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { reactive, ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
+import { useRoute, useRouter } from "vue-router";
+import { LockOutlined, UserOutlined } from "@ant-design/icons-vue";
 import { message } from "ant-design-vue";
 import type { Rule } from "ant-design-vue/es/form";
 import Index from "@components/global/footer/index.vue";
 import useLoginUserStore from "@/stores/modules/useLoginUserStore.ts";
 import { ROUTER_CONSTANTS } from "@/constants/router.ts";
-import { SYSTEM_LOGO, SYSTEM_TITLE, SYSTEM_SUBTITLE, GITHUB_URL } from "@/constants/system.ts";
+import { GITHUB_URL, SYSTEM_LOGO, SYSTEM_SUBTITLE, SYSTEM_TITLE } from "@/constants/system.ts";
 
 defineOptions({ name: "UserLoginPage" });
 

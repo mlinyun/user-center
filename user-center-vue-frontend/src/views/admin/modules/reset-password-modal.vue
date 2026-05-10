@@ -1,11 +1,11 @@
 <template>
     <a-modal
-        :open="visible"
-        title="重置用户密码"
-        width="520px"
         :confirm-loading="submitting"
         :mask-closable="false"
+        :open="visible"
         destroy-on-close
+        title="重置用户密码"
+        width="520px"
         @cancel="handleCancel"
         @ok="handleSubmit"
     >
@@ -21,25 +21,25 @@
 
         <a-alert
             v-if="user"
-            type="warning"
-            show-icon
-            class="info-alert"
             :message="`当前操作账号：${user.userAccount}`"
+            class="info-alert"
             description="重置后密码将立即生效，请谨慎操作。"
+            show-icon
+            type="warning"
         />
 
         <a-form
             ref="formRef"
             :model="formModel"
             :rules="rules"
-            layout="vertical"
             autocomplete="off"
+            layout="vertical"
         >
             <a-form-item label="新密码" name="newPassword">
                 <a-input-password
                     v-model:value="formModel.newPassword"
-                    placeholder="请输入新的登录密码"
                     allow-clear
+                    placeholder="请输入新的登录密码"
                 >
                     <template #prefix>
                         <LockOutlined />
@@ -50,8 +50,8 @@
             <a-form-item label="确认密码" name="checkPassword">
                 <a-input-password
                     v-model:value="formModel.checkPassword"
-                    placeholder="请再次输入新的登录密码"
                     allow-clear
+                    placeholder="请再次输入新的登录密码"
                 >
                     <template #prefix>
                         <SafetyOutlined />
@@ -62,7 +62,7 @@
     </a-modal>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { reactive, ref, watch } from "vue";
 import type { FormInstance } from "ant-design-vue";
 import type { Rule } from "ant-design-vue/es/form";

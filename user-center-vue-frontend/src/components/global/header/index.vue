@@ -3,8 +3,8 @@
         <div class="header-content">
             <!-- Logo 和标题 -->
             <div class="logo-section">
-                <router-link to="/welcome" class="logo-link">
-                    <img class="logo" :src="SYSTEM_LOGO" alt="logo" />
+                <router-link class="logo-link" to="/welcome">
+                    <img :src="SYSTEM_LOGO" alt="logo" class="logo" />
                     <span class="title">{{ SYSTEM_TITLE }}</span>
                 </router-link>
             </div>
@@ -14,7 +14,7 @@
                 <a-space :size="24">
                     <!-- GitHub 链接 -->
                     <a-tooltip title="GitHub">
-                        <a :href="GITHUB_URL" target="_blank" rel="noopener noreferrer">
+                        <a :href="GITHUB_URL" rel="noopener noreferrer" target="_blank">
                             <GithubOutlined class="icon-link" />
                         </a>
                     </a-tooltip>
@@ -67,20 +67,20 @@
     </a-layout-header>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 import {
-    GithubOutlined,
-    UserOutlined,
-    SettingOutlined,
-    LogoutOutlined,
     DownOutlined,
+    GithubOutlined,
+    LogoutOutlined,
+    SettingOutlined,
+    UserOutlined,
 } from "@ant-design/icons-vue";
 import { message } from "ant-design-vue";
 import useLoginUserStore from "@/stores/modules/useLoginUserStore.ts";
 import { ROUTER_CONSTANTS } from "@/constants/router.ts";
-import { SYSTEM_LOGO, SYSTEM_TITLE, GITHUB_URL, DEFAULT_AVATAR } from "@/constants/system.ts";
+import { DEFAULT_AVATAR, GITHUB_URL, SYSTEM_LOGO, SYSTEM_TITLE } from "@/constants/system.ts";
 
 defineOptions({ name: "GlobalHeader" });
 

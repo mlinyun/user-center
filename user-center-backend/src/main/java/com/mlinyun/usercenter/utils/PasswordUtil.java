@@ -40,6 +40,18 @@ import lombok.extern.slf4j.Slf4j;
 public final class PasswordUtil {
 
     /**
+     * 密码强度等级常量：弱 - 0
+     */
+    public static final int STRENGTH_WEAK = 0;
+    /**
+     * 密码强度等级常量：中 - 1
+     */
+    public static final int STRENGTH_MEDIUM = 1;
+    /**
+     * 密码强度等级常量：强 - 2
+     */
+    public static final int STRENGTH_STRONG = 2;
+    /**
      * BCrypt 加密强度（工作因子）
      *
      * <p>
@@ -54,47 +66,26 @@ public final class PasswordUtil {
      * 注意：强度每增加1，计算时间翻倍（2^n 次迭代）
      */
     private static final int DEFAULT_BCRYPT_STRENGTH = 10;
-
     /**
      * 密码强度最小范围
      */
     private static final int PASSWORD_STRONG_MIN = 4;
-
     /**
      * 密码强度最大范围
      */
     private static final int PASSWORD_STRONG_MAX = 31;
-
     /**
      * 密码最小长度
      */
     private static final int PASSWORD_MIN_LENGTH = 8;
-
     /**
      * 密码最大长度
      */
     private static final int PASSWORD_MAX_LENGTH = 20;
-
     /**
      * 密码默认长度
      */
     private static final int DEFAULT_PASSWORD_LENGTH = 16;
-
-    /**
-     * 密码强度等级常量：弱 - 0
-     */
-    public static final int STRENGTH_WEAK = 0;
-
-    /**
-     * 密码强度等级常量：中 - 1
-     */
-    public static final int STRENGTH_MEDIUM = 1;
-
-    /**
-     * 密码强度等级常量：强 - 2
-     */
-    public static final int STRENGTH_STRONG = 2;
-
     /**
      * 大写字母字符集
      */
@@ -147,6 +138,7 @@ public final class PasswordUtil {
      *
      * <p>
      * 使用 BCrypt 算法对密码进行加密，自动生成随机盐值
+     * </p>
      *
      * @param rawPassword 原始密码
      * @return 加密后的密码（60个字符，格式：$2a$10$salt+hash）
@@ -191,6 +183,7 @@ public final class PasswordUtil {
      *
      * <p>
      * 用于用户登录时验证输入的密码是否与数据库中存储的加密密码匹配
+     * </p>
      *
      * @param rawPassword 用户输入的原始密码
      * @param hashedPassword 数据库中存储的加密密码

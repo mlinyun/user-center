@@ -1,9 +1,9 @@
 <template>
     <a-card
         :bordered="true"
-        hoverable
-        class="tech-stack-card"
         :style="{ borderLeft: `4px solid ${color}` }"
+        class="tech-stack-card"
+        hoverable
     >
         <a-typography-title :level="5" class="stack-title">
             {{ title }}
@@ -16,7 +16,7 @@
     </a-card>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 defineOptions({ name: "TechStackCard" });
 
 /**

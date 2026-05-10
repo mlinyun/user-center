@@ -3,7 +3,7 @@
         <a-spin :spinning="loading" tip="加载中...">
             <a-row :gutter="[24, 24]" style="align-items: stretch">
                 <!-- 左侧：用户基本信息卡片 -->
-                <a-col :xs="24" :md="8" style="display: flex">
+                <a-col :md="8" :xs="24" style="display: flex">
                     <a-card :bordered="true" class="user-info-card">
                         <!-- 用户头像 -->
                         <div class="avatar-wrapper">
@@ -18,7 +18,7 @@
                         <a-typography-title :level="3" class="user-name">
                             {{ userInfo?.userName || "未设置昵称" }}
                         </a-typography-title>
-                        <a-typography-text type="secondary" class="user-account">
+                        <a-typography-text class="user-account" type="secondary">
                             @{{ userInfo?.userAccount }}
                         </a-typography-text>
 
@@ -31,7 +31,7 @@
 
                         <!-- 用户简介 -->
                         <div v-if="userInfo?.userProfile" class="user-profile">
-                            <a-typography-text type="secondary" class="profile-text">
+                            <a-typography-text class="profile-text" type="secondary">
                                 {{ userInfo.userProfile }}
                             </a-typography-text>
                         </div>
@@ -42,12 +42,12 @@
                             <div class="stat-item stat-item-border">
                                 <div class="stat-icon">🆔</div>
                                 <div class="stat-content">
-                                    <a-typography-text type="secondary" class="stat-label">
+                                    <a-typography-text class="stat-label" type="secondary">
                                         用户 ID
                                     </a-typography-text>
                                     <a-typography-text
-                                        :copyable="true"
                                         :code="true"
+                                        :copyable="true"
                                         class="stat-value"
                                     >
                                         {{ userInfo?.id || "-" }}
@@ -59,7 +59,7 @@
                             <div class="stat-item">
                                 <div class="stat-icon">📅</div>
                                 <div class="stat-content">
-                                    <a-typography-text type="secondary" class="stat-label">
+                                    <a-typography-text class="stat-label" type="secondary">
                                         账号使用天数
                                     </a-typography-text>
                                     <div class="days-wrapper">
@@ -73,7 +73,7 @@
                 </a-col>
 
                 <!-- 右侧：详细信息 -->
-                <a-col :xs="24" :md="16" style="display: flex; flex-direction: column">
+                <a-col :md="16" :xs="24" style="display: flex; flex-direction: column">
                     <!-- 账号信息 -->
                     <a-card :bordered="true" class="info-card">
                         <template #title>
@@ -136,8 +136,8 @@
                             <a-descriptions-item label="星球编号">
                                 <a-typography-text
                                     v-if="userInfo?.planetCode"
-                                    :copyable="true"
                                     :code="true"
+                                    :copyable="true"
                                 >
                                     {{ userInfo.planetCode }}
                                 </a-typography-text>
@@ -163,7 +163,7 @@
                             <a-descriptions-item label="最近更新时间">
                                 {{ formatDateTime(userInfo?.updateTime) }}
                             </a-descriptions-item>
-                            <a-descriptions-item label="最近编辑时间" :span="2">
+                            <a-descriptions-item :span="2" label="最近编辑时间">
                                 <a-typography-text v-if="userInfo?.editTime">
                                     {{ formatDateTime(userInfo.editTime) }}
                                 </a-typography-text>
@@ -179,9 +179,9 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed, onMounted, ref } from "vue";
-import { UserOutlined, PhoneOutlined, MailOutlined } from "@ant-design/icons-vue";
+import { MailOutlined, PhoneOutlined, UserOutlined } from "@ant-design/icons-vue";
 import useLoginUserStore from "@/stores/modules/useLoginUserStore.ts";
 import GenderDisplay from "@/views/user/profile/modules/gender-display.vue";
 

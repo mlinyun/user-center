@@ -1,7 +1,7 @@
 <template>
     <div class="user-manage-page">
-        <a-space direction="vertical" size="large" class="page-space">
-            <a-card class="overview-card" :bordered="false">
+        <a-space class="page-space" direction="vertical" size="large">
+            <a-card :bordered="false" class="overview-card">
                 <div class="overview-header">
                     <a-space size="middle">
                         <TeamOutlined class="overview-icon" />
@@ -16,10 +16,10 @@
                 </div>
             </a-card>
 
-            <a-card class="search-card" :bordered="true">
+            <a-card :bordered="true" class="search-card">
                 <a-form :model="searchForm" layout="vertical">
                     <a-row :gutter="[16, 16]">
-                        <a-col :xs="24" :sm="12" :md="8" :lg="6">
+                        <a-col :lg="6" :md="8" :sm="12" :xs="24">
                             <a-form-item label="用户账号">
                                 <a-input
                                     v-model:value="searchForm.userAccount"
@@ -28,7 +28,7 @@
                                 />
                             </a-form-item>
                         </a-col>
-                        <a-col :xs="24" :sm="12" :md="8" :lg="6">
+                        <a-col :lg="6" :md="8" :sm="12" :xs="24">
                             <a-form-item label="用户昵称">
                                 <a-input
                                     v-model:value="searchForm.userName"
@@ -37,7 +37,7 @@
                                 />
                             </a-form-item>
                         </a-col>
-                        <a-col :xs="24" :sm="12" :md="8" :lg="6">
+                        <a-col :lg="6" :md="8" :sm="12" :xs="24">
                             <a-form-item label="用户角色">
                                 <a-select
                                     v-model:value="searchForm.userRole"
@@ -53,7 +53,7 @@
                                 </a-select>
                             </a-form-item>
                         </a-col>
-                        <a-col :xs="24" :sm="12" :md="8" :lg="6">
+                        <a-col :lg="6" :md="8" :sm="12" :xs="24">
                             <a-form-item label="账号状态">
                                 <a-select
                                     v-model:value="searchForm.userStatus"
@@ -69,7 +69,7 @@
                                 </a-select>
                             </a-form-item>
                         </a-col>
-                        <a-col :xs="24" :sm="12" :md="8" :lg="6">
+                        <a-col :lg="6" :md="8" :sm="12" :xs="24">
                             <a-form-item label="性别">
                                 <a-select
                                     v-model:value="searchForm.userGender"
@@ -82,7 +82,7 @@
                                 </a-select>
                             </a-form-item>
                         </a-col>
-                        <a-col :xs="24" :sm="12" :md="8" :lg="6">
+                        <a-col :lg="6" :md="8" :sm="12" :xs="24">
                             <a-form-item label="手机号码">
                                 <a-input
                                     v-model:value="searchForm.userPhone"
@@ -91,7 +91,7 @@
                                 />
                             </a-form-item>
                         </a-col>
-                        <a-col :xs="24" :sm="12" :md="8" :lg="6">
+                        <a-col :lg="6" :md="8" :sm="12" :xs="24">
                             <a-form-item label="邮箱地址">
                                 <a-input
                                     v-model:value="searchForm.userEmail"
@@ -100,7 +100,7 @@
                                 />
                             </a-form-item>
                         </a-col>
-                        <a-col :xs="24" :sm="12" :md="8" :lg="6">
+                        <a-col :lg="6" :md="8" :sm="12" :xs="24">
                             <a-form-item label="星球编号">
                                 <a-input
                                     v-model:value="searchForm.planetCode"
@@ -109,21 +109,21 @@
                                 />
                             </a-form-item>
                         </a-col>
-                        <a-col :xs="24" :md="12" :lg="12">
+                        <a-col :lg="12" :md="12" :xs="24">
                             <a-form-item label="创建时间">
                                 <a-range-picker
                                     v-model:value="searchForm.createTimeRange"
-                                    show-time
                                     format="YYYY-MM-DD HH:mm"
-                                    value-format="YYYY-MM-DD HH:mm:ss"
+                                    show-time
                                     style="width: 100%"
+                                    value-format="YYYY-MM-DD HH:mm:ss"
                                 />
                             </a-form-item>
                         </a-col>
                     </a-row>
                     <div class="search-actions">
                         <a-space>
-                            <a-button type="primary" :loading="loading" @click="handleSearch">
+                            <a-button :loading="loading" type="primary" @click="handleSearch">
                                 <SearchOutlined /> 查询
                             </a-button>
                             <a-button :disabled="loading" @click="handleReset">
@@ -140,8 +140,8 @@
                     :data-source="tableData"
                     :loading="loading"
                     :pagination="pagination"
-                    row-key="id"
                     :scroll="{ x: 1300 }"
+                    row-key="id"
                     @change="handleTableChange"
                 >
                     <template #bodyCell="{ column, record, index }">
@@ -235,14 +235,14 @@
                         </template>
                         <template v-else-if="column.key === 'actions'">
                             <a-space size="small">
-                                <a-button type="link" size="small" @click="handleView(record)">
+                                <a-button size="small" type="link" @click="handleView(record)">
                                     <EyeOutlined /> 查看
                                 </a-button>
-                                <a-button type="link" size="small" @click="handleEdit(record)">
+                                <a-button size="small" type="link" @click="handleEdit(record)">
                                     <EditOutlined /> 编辑
                                 </a-button>
-                                <a-dropdown placement="bottomRight" :trigger="['click']">
-                                    <a-button type="link" size="small">
+                                <a-dropdown :trigger="['click']" placement="bottomRight">
+                                    <a-button size="small" type="link">
                                         <MoreOutlined /> 更多
                                     </a-button>
                                     <template #overlay>
@@ -290,38 +290,38 @@
             :user="resetPasswordUser"
             @success="refreshTable"
         />
-        <ViewUserDrawer :visible="viewDrawerVisible" :user="viewingUser" @close="closeDrawer" />
+        <ViewUserDrawer :user="viewingUser" :visible="viewDrawerVisible" @close="closeDrawer" />
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import dayjs from "dayjs";
 import { createVNode, onMounted, reactive, ref, watch } from "vue";
 import {
-    Modal,
     type MenuProps,
+    Modal,
     type PaginationProps,
     type TableColumnsType,
     type TableProps,
 } from "ant-design-vue";
 import {
-    TeamOutlined,
-    PlusOutlined,
-    SearchOutlined,
-    ReloadOutlined,
-    UserOutlined,
-    SafetyOutlined,
-    PhoneOutlined,
-    MailOutlined,
-    ClockCircleOutlined,
-    EyeOutlined,
-    EditOutlined,
-    KeyOutlined,
-    StopOutlined,
     CheckCircleOutlined,
+    ClockCircleOutlined,
     DeleteOutlined,
-    MoreOutlined,
+    EditOutlined,
     ExclamationCircleOutlined,
+    EyeOutlined,
+    KeyOutlined,
+    MailOutlined,
+    MoreOutlined,
+    PhoneOutlined,
+    PlusOutlined,
+    ReloadOutlined,
+    SafetyOutlined,
+    SearchOutlined,
+    StopOutlined,
+    TeamOutlined,
+    UserOutlined,
 } from "@ant-design/icons-vue";
 import { USER_ROLE, USER_STATUS } from "@/constants/system.ts";
 import { adminGetUserInfoByPage } from "@/api/admin.ts";

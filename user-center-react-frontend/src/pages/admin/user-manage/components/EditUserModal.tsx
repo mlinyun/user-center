@@ -1,19 +1,19 @@
 ﻿import { ModalForm, ProFormRadio, ProFormText, ProFormTextArea } from '@ant-design/pro-components';
 import {
-  EditOutlined,
-  UserOutlined,
-  ManOutlined,
-  WomanOutlined,
-  PhoneOutlined,
-  MailOutlined,
-  InfoCircleOutlined,
   CameraOutlined,
-  SafetyOutlined,
+  EditOutlined,
   IdcardOutlined,
+  InfoCircleOutlined,
+  MailOutlined,
+  ManOutlined,
+  PhoneOutlined,
+  SafetyOutlined,
   TeamOutlined,
+  UserOutlined,
+  WomanOutlined,
 } from '@ant-design/icons';
-import { Space, Typography, Tag, Divider, Avatar, Upload, Spin } from 'antd';
-import React, { useState, useEffect } from 'react';
+import { Avatar, Divider, Space, Spin, Tag, Typography, Upload } from 'antd';
+import React, { useEffect, useState } from 'react';
 import { useUserOperations } from '../hooks/useUserOperations';
 
 const { Text } = Typography;

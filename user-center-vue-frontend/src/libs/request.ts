@@ -1,8 +1,8 @@
 import axios, {
+    type AxiosError,
     type AxiosInstance,
     type AxiosRequestConfig,
     type AxiosResponse,
-    type AxiosError,
     type InternalAxiosRequestConfig,
 } from "axios";
 import { message, notification } from "ant-design-vue";
@@ -194,6 +194,13 @@ class RequestService {
     }
 
     /**
+     * 获取 axios 实例
+     */
+    public getInstance(): AxiosInstance {
+        return this.instance;
+    }
+
+    /**
      * 设置请求拦截器
      */
     private setupRequestInterceptors(): void {
@@ -307,13 +314,6 @@ class RequestService {
      */
     private generateRequestId(): string {
         return `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
-    }
-
-    /**
-     * 获取 axios 实例
-     */
-    public getInstance(): AxiosInstance {
-        return this.instance;
     }
 }
 

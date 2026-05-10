@@ -1,6 +1,6 @@
 // @ts-ignore
 /* eslint-disable */
-import { request } from '@umijs/max';
+import {request} from '@umijs/max';
 
 /**
  * 获取当前登录用户信息

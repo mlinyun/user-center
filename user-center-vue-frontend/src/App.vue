@@ -9,7 +9,7 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import zhCN from "ant-design-vue/es/locale/zh_CN";

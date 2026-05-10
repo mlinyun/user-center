@@ -1,14 +1,14 @@
 import { ModalForm, ProFormText } from '@ant-design/pro-components';
 import {
-  KeyOutlined,
-  UserOutlined,
-  SafetyOutlined,
   CheckCircleOutlined,
+  KeyOutlined,
   LockOutlined,
+  SafetyOutlined,
   ThunderboltOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
-import { Space, Typography, Progress, Tag } from 'antd';
-import React, { useState, useEffect } from 'react';
+import { Progress, Space, Tag, Typography } from 'antd';
+import React, { useEffect, useState } from 'react';
 
 const { Text } = Typography;
 

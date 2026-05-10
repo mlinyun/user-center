@@ -3,7 +3,10 @@ package com.mlinyun.usercenter.service.user;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
@@ -28,10 +31,11 @@ import org.springframework.test.util.ReflectionTestUtils;
 @DisplayName("用户注册服务测试")
 class UserRegisterTest {
 
+    // 随机生成的用户名和密码长度
+    private static final int MAX_LENGTH = 21;
     @Spy
     @InjectMocks
     private UserServiceImpl userService;
-
     @Mock
     private UserMapper mockUserMapper;
 
@@ -40,9 +44,6 @@ class UserRegisterTest {
         // 手动设置 baseMapper
         ReflectionTestUtils.setField(userService, "baseMapper", mockUserMapper);
     }
-
-    // 随机生成的用户名和密码长度
-    private static final int MAX_LENGTH = 21;
 
     /**
      * 构建用户注册请求体

@@ -1,3 +1,9 @@
+allowBuilds:
+  core-js: true
+  core-js-pure: true
+  es5-ext: true
+  esbuild: true
+  puppeteer-core: true
 onlyBuiltDependencies:
   - core-js
   - core-js-pure

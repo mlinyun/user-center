@@ -1,19 +1,19 @@
 <template>
     <a-layout-sider
         v-model:collapsed="collapsed"
-        :trigger="null"
-        collapsible
-        theme="light"
-        :width="200"
         :collapsed-width="64"
         :style="{ borderRight: '1px solid #f0f0f0' }"
+        :trigger="null"
+        :width="200"
         class="sidebar-fixed"
+        collapsible
+        theme="light"
     >
         <!-- 菜单 -->
         <a-menu
             v-model:selectedKeys="selectedKeys"
-            mode="inline"
             :items="menuItems"
+            mode="inline"
             @click="handleMenuClick"
         />
 
@@ -25,16 +25,16 @@
     </a-layout-sider>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed, h, ref, watch } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import {
+    CrownOutlined,
+    MenuFoldOutlined,
+    MenuUnfoldOutlined,
+    SettingOutlined,
     SmileOutlined,
     UserOutlined,
-    SettingOutlined,
-    CrownOutlined,
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
 } from "@ant-design/icons-vue";
 import type { MenuProps } from "ant-design-vue";
 import useLoginUserStore from "@/stores/modules/useLoginUserStore.ts";

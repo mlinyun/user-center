@@ -1,4 +1,8 @@
 {
+  "name": "user-center-docs",
+  "version": "1.0.0",
+  "description": "Documentation for User Center",
+  "private": true,
   "devDependencies": {
     "vitepress": "2.0.0-alpha.13"
   },

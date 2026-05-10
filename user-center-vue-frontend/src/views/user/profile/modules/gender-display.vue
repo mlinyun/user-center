@@ -14,8 +14,8 @@
     <a-typography-text v-else type="secondary">未设置</a-typography-text>
 </template>
 
-<script setup lang="ts">
-import { UserOutlined, ManOutlined, WomanOutlined } from "@ant-design/icons-vue";
+<script lang="ts" setup>
+import { ManOutlined, UserOutlined, WomanOutlined } from "@ant-design/icons-vue";
 
 /**
  * 性别显示组件

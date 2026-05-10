@@ -6,9 +6,9 @@
                 <template v-for="(link, index) in footerLinks" :key="link.key">
                     <a
                         :href="link.href"
-                        target="_blank"
-                        rel="noopener noreferrer"
                         class="footer-link"
+                        rel="noopener noreferrer"
+                        target="_blank"
                     >
                         <component :is="link.icon" />
                         {{ link.title }}
@@ -22,17 +22,17 @@
         <div class="footer-copyright">
             <span>
                 Copyright © {{ currentYear }}
-                <a :href="GITHUB_URL" target="_blank" rel="noopener noreferrer" class="author-link">
+                <a :href="GITHUB_URL" class="author-link" rel="noopener noreferrer" target="_blank">
                     凌云 (mlinyun)
                 </a>
                 All Rights Reserved.
             </span>
-            <a-divider type="vertical" :style="{ margin: '0 8px' }" />
+            <a-divider :style="{ margin: '0 8px' }" type="vertical" />
             <a
-                href="https://beian.miit.gov.cn/"
-                target="_blank"
-                rel="noopener noreferrer"
                 class="beian-link"
+                href="https://beian.miit.gov.cn/"
+                rel="noopener noreferrer"
+                target="_blank"
             >
                 粤ICP备xxxxxxxxxx号-x
             </a>
@@ -40,7 +40,7 @@
     </footer>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { GithubOutlined, GlobalOutlined, MailOutlined } from "@ant-design/icons-vue";
 import { getCurrentYear } from "@utils/date.ts";
 import { DOCUMENT_URL, GITHUB_URL } from "@/constants/system.ts";

@@ -49,7 +49,7 @@ public class PageRequest implements Serializable {
      * 排序字段
      */
     @Schema(description = "排序字段", example = "createTime")
-    @Pattern(regexp = "^[A-Za-z0-9_\\.]+$", message = "排序字段只能包含字母、数字、下划线和点")
+    @Pattern(regexp = "^[A-Za-z0-9_.]+$", message = "排序字段只能包含字母、数字、下划线和点")
     private String sortField;
 
     /**

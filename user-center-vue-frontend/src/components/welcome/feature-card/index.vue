@@ -1,12 +1,12 @@
 <template>
-    <a-card :bordered="true" hoverable class="feature-card">
+    <a-card :bordered="true" class="feature-card" hoverable>
         <div class="feature-icon">
             <component :is="icon" />
         </div>
         <a-typography-title :level="4" class="feature-title">
             {{ title }}
         </a-typography-title>
-        <a-typography-paragraph type="secondary" class="feature-desc">
+        <a-typography-paragraph class="feature-desc" type="secondary">
             {{ desc }}
         </a-typography-paragraph>
         <div v-if="tags && tags.length > 0" class="feature-tags">
@@ -17,7 +17,7 @@
     </a-card>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import type { Component } from "vue";
 
 defineOptions({ name: "FeatureCard" });

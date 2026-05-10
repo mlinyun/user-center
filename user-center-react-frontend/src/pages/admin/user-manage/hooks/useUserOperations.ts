@@ -1,10 +1,10 @@
 import {
   adminAddUser,
+  adminBanOrUnbanUser,
   adminDeleteUserById,
   adminGetUserInfoById,
   adminRestUserPassword,
   adminUpdateUserInfo,
-  adminBanOrUnbanUser,
 } from '@/services/ant-design-pro/admin';
 import { uploadAvatar } from '@/services/ant-design-pro/file';
 import { message } from 'antd';

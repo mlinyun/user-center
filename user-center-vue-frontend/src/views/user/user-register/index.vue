@@ -3,26 +3,26 @@
         <div class="register-container">
             <div class="register-header">
                 <div class="logo-title">
-                    <img class="logo" :src="SYSTEM_LOGO" alt="logo" />
+                    <img :src="SYSTEM_LOGO" alt="logo" class="logo" />
                     <h1 class="title">{{ SYSTEM_TITLE }}</h1>
                 </div>
                 <p class="subtitle">{{ SYSTEM_SUBTITLE }}</p>
             </div>
 
-            <a-card class="register-card" :bordered="false">
+            <a-card :bordered="false" class="register-card">
                 <a-tabs v-model:activeKey="activeKey" centered>
                     <a-tab-pane key="account" tab="账号密码注册">
                         <a-form
                             :model="registerForm"
                             :rules="registerRules"
-                            @finish="handleRegister"
                             layout="vertical"
+                            @finish="handleRegister"
                         >
                             <a-form-item name="userAccount">
                                 <a-input
                                     v-model:value="registerForm.userAccount"
-                                    size="large"
                                     placeholder="请输入注册账号"
+                                    size="large"
                                 >
                                     <template #prefix>
                                         <UserOutlined />
@@ -33,8 +33,8 @@
                             <a-form-item name="planetCode">
                                 <a-input
                                     v-model:value="registerForm.planetCode"
-                                    size="large"
                                     placeholder="请输入星球编号"
+                                    size="large"
                                 >
                                     <template #prefix>
                                         <FieldNumberOutlined />
@@ -45,8 +45,8 @@
                             <a-form-item name="userPassword">
                                 <a-input-password
                                     v-model:value="registerForm.userPassword"
-                                    size="large"
                                     placeholder="请输入密码"
+                                    size="large"
                                 >
                                     <template #prefix>
                                         <LockOutlined />
@@ -57,8 +57,8 @@
                             <a-form-item name="checkPassword">
                                 <a-input-password
                                     v-model:value="registerForm.checkPassword"
-                                    size="large"
                                     placeholder="请再次输入密码"
+                                    size="large"
                                 >
                                     <template #prefix>
                                         <LockOutlined />
@@ -68,11 +68,11 @@
 
                             <a-form-item>
                                 <a-button
-                                    type="primary"
-                                    html-type="submit"
-                                    size="large"
                                     :loading="loading"
                                     block
+                                    html-type="submit"
+                                    size="large"
+                                    type="primary"
                                 >
                                     注册
                                 </a-button>
@@ -98,16 +98,16 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
-import { UserOutlined, LockOutlined, FieldNumberOutlined } from "@ant-design/icons-vue";
+import { FieldNumberOutlined, LockOutlined, UserOutlined } from "@ant-design/icons-vue";
 import { message } from "ant-design-vue";
 import type { Rule } from "ant-design-vue/es/form";
 import Index from "@components/global/footer/index.vue";
 import { userRegister } from "@/api/user.ts";
 import { ROUTER_CONSTANTS } from "@/constants/router.ts";
-import { SYSTEM_LOGO, SYSTEM_TITLE, SYSTEM_SUBTITLE } from "@/constants/system.ts";
+import { SYSTEM_LOGO, SYSTEM_SUBTITLE, SYSTEM_TITLE } from "@/constants/system.ts";
 
 defineOptions({ name: "UserRegisterPage" });
 

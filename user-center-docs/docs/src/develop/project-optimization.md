@@ -305,9 +305,10 @@ public class GlobalExceptionHandler {
 
 ### 修改之前的代码
 
-我们在之前写的代码中，很多都是直接返回信息，没有做通用的返回处理，还有如果出现参数为空我们直接返回 `-1` 或者 `null`，没有抛出异常。接下来我们就来修改这两个问题：
+我们在之前写的代码中，很多都是直接返回信息，没有做通用的返回处理，还有如果出现参数为空我们直接返回 `-1` 或者 `null`
+，没有抛出异常。接下来我们就来修改这两个问题：
 
-![image-20240208215428686](https://notebook.mlinyun.com/user-center/image-20240208215428686.png)
+![image-20240208215428686](https://static.mlinyun.com/user-center/image-20240208215428686.png)
 
 其他代码也需要根据实际情况进行修改，因为代码很长，这里就不展示了。
 
@@ -421,29 +422,32 @@ public class SwaggerConfiguration {
 
 打开 `UserController.java` 类，在类上添加 `@Tag` 标签用来描述一组操作的信息，在方法上面添加 `@Operation` 注解，用来描述接口信息：
 
-![image-20240208232254574](https://notebook.mlinyun.com/user-center/image-20240208232254574.png)
+![image-20240208232254574](https://static.mlinyun.com/user-center/image-20240208232254574.png)
 
 #### 添加实体类信息
 
 在此之前我们使用了三个实体类，分别是 `User.java`，`UserLoginRequest.java` 和 `UserRegisterRequest.java`，然后现在我们添加该实体类注解：
 
-![image-20240208232559541](https://notebook.mlinyun.com/user-center/image-20240208232559541.png)
+![image-20240208232559541](https://static.mlinyun.com/user-center/image-20240208232559541.png)
 
 #### 访问文档
 
 启动项目，在地址栏之后添加 `/doc.html` 即可访问 knife4j 文档，如下图：
 
-![image-20240208233259652](https://notebook.mlinyun.com/user-center/image-20240208233259652.png)
+![image-20240208233259652](https://static.mlinyun.com/user-center/image-20240208233259652.png)
 
-如果想访问 Swagger 文档，访问时请在后面追加 `/swagger-ui/index.html`，也可以追加 `/user-center-api.html` 访问（这个 URL 是我们上面配置的）：
+如果想访问 Swagger 文档，访问时请在后面追加 `/swagger-ui/index.html`，也可以追加 `/user-center-api.html` 访问（这个 URL
+是我们上面配置的）：
 
-![image-20240208233649577](https://notebook.mlinyun.com/user-center/image-20240208233649577.png)
+![image-20240208233649577](https://static.mlinyun.com/user-center/image-20240208233649577.png)
 
 ## 前端项目优化
 
-前端项目的优化就比较简单了，我们添加一个全局响应处理器来配合后端就行。这里鱼皮视频是另外新建一个全局请求类，我这里就不用这种方式了，因为我看了 Ant Design Pro 的官网有对应的教程：[响应后拦截](https://pro.ant.design/zh-CN/docs/request#%E8%AF%B7%E6%B1%82%E5%89%8D%E6%8B%A6%E6%88%AArequestinterceptors)。
+前端项目的优化就比较简单了，我们添加一个全局响应处理器来配合后端就行。这里鱼皮视频是另外新建一个全局请求类，我这里就不用这种方式了，因为我看了
+Ant Design Pro
+的官网有对应的教程：[响应后拦截](https://pro.ant.design/zh-CN/docs/request#%E8%AF%B7%E6%B1%82%E5%89%8D%E6%8B%A6%E6%88%AArequestinterceptors)。
 
-![image-20240208220320982](https://notebook.mlinyun.com/user-center/image-20240208220320982.png)
+![image-20240208220320982](https://static.mlinyun.com/user-center/image-20240208220320982.png)
 
 看来官网的教程之后，我们就可以来写属于我们自己的响应拦截器了，打开 `src/app.tsx` 文件，写入下面代码：
 
@@ -476,14 +480,14 @@ export const request: RequestConfig = {
 };
 ```
 
-![image-20240208220540432](https://notebook.mlinyun.com/user-center/image-20240208220540432.png)
+![image-20240208220540432](https://static.mlinyun.com/user-center/image-20240208220540432.png)
 
 然后我们来测试一下，我们先用错误密码来尝试登录：
 
-![image-20240208220858578](https://notebook.mlinyun.com/user-center/image-20240208220858578.png)
+![image-20240208220858578](https://static.mlinyun.com/user-center/image-20240208220858578.png)
 
 在来测试一下注册，我们注册一个已经存在的用户，或者已经注册过的星球编号：
 
-![image-20240208221144179](https://notebook.mlinyun.com/user-center/image-20240208221144179.png)
+![image-20240208221144179](https://static.mlinyun.com/user-center/image-20240208221144179.png)
 
-![image-20240208221237954](https://notebook.mlinyun.com/user-center/image-20240208221237954.png)
+![image-20240208221237954](https://static.mlinyun.com/user-center/image-20240208221237954.png)

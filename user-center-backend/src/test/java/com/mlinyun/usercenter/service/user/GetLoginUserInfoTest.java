@@ -1,7 +1,11 @@
 package com.mlinyun.usercenter.service.user;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.mlinyun.usercenter.common.ResultCodeEnum;
 import com.mlinyun.usercenter.constant.UserConstant;
@@ -26,21 +30,17 @@ import org.springframework.test.util.ReflectionTestUtils;
 @DisplayName("获取登录用户信息测试")
 class GetLoginUserInfoTest {
 
+    // 模拟的用户 ID
+    private static final Long USER_ID = 1899878538809757698L;
     @Spy
     @InjectMocks
     private UserServiceImpl userService;
-
     @Mock
     private UserMapper mockUserMapper;
-
     @Mock
     private HttpServletRequest mockRequest;
-
     @Mock
     private HttpSession mockSession;
-
-    // 模拟的用户 ID
-    private static final Long USER_ID = 1899878538809757698L;
 
     @BeforeEach
     void setUp() {
