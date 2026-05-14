@@ -25,6 +25,34 @@ jobs:
       run:
         working-directory: user-center-backend
 
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+      redis:
+        image: redis:8.0
+        env:
+          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
+        ports:
+          - 6379:6379
+        options: >-
+          --requirepass ${{ secrets.REDIS_PASSWORD }}
+          --health-cmd="redis-cli -a ${{ secrets.REDIS_PASSWORD }} ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
