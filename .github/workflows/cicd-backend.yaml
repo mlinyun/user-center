@@ -53,7 +53,34 @@ jobs:
           architecture: x64
           cache: maven
 
+      - name: Install MySQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mysql-client
+
+      - name: Init database schema (root)
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+        run: |
+          for i in {1..30}; do
+            mysqladmin ping -h 127.0.0.1 -uroot -p"$MYSQL_ROOT_PASSWORD" && break
+            sleep 2
+          done
+          mysql -h 127.0.0.1 -uroot -p"$MYSQL_ROOT_PASSWORD" < ../sql/user-center-schema.sql
+
+      - name: Init database tables and data (app user)
+        env:
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+        run: |
+          mysql -h 127.0.0.1 -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" < ../sql/user-center-table.sql
+          mysql -h 127.0.0.1 -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" < ../sql/user-center-data.sql
+
       - name: Run the Maven verify phase
+        env:
+          SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:3306/user_center?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+          SPRING_DATASOURCE_USERNAME: ${{ secrets.MYSQL_USER }}
+          SPRING_DATASOURCE_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
         run: mvn --batch-mode --update-snapshots verify
 
       - name: Copy JAR to staging
