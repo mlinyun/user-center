@@ -1,4 +1,4 @@
-name: User Center Backend CI/CD Workflow
+name: Backend CI/CD Workflow
 run-name: Backend CI/CD Workflow triggered by ${{ github.actor }} on ${{ github.ref_name }} via ${{ github.event_name }}
 
 on:
@@ -90,4 +90,4 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: user-center-backend-jar
-          path: staging
+          path: user-center-backend/staging
