@@ -25,6 +25,9 @@ jobs:
       run:
         working-directory: user-center-backend
 
+    env:
+      REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
+
     services:
       mysql:
         image: mysql:8.4
@@ -42,13 +45,11 @@ jobs:
           --health-retries=3
       redis:
         image: redis:8.0
-        env:
-          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
         ports:
           - 6379:6379
         options: >-
-          --requirepass ${{ secrets.REDIS_PASSWORD }}
-          --health-cmd="redis-cli -a ${{ secrets.REDIS_PASSWORD }} ping"
+          --requirepass ${{ env.REDIS_PASSWORD }}
+          --health-cmd="redis-cli -a ${{ env.REDIS_PASSWORD }} ping"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=3
