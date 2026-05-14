@@ -38,7 +38,7 @@ jobs:
           cache: maven
 
       - name: Run the Maven verify phase
-        run: mvn verify -B -DskipTests
+        run: mvn --batch-mode --update-snapshots verify
 
       - name: Copy JAR to staging
         run: mkdir staging && cp target/*.jar staging
